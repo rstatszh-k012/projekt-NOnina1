@@ -51,7 +51,8 @@ Temp2024_kor <- Temp2024 |>
          Datum = sub(" abend 16:45", "", Datum),
          Datum = dmy(Datum),
          Liefermonat = month(Datum),
-         Labor = 1) |> 
+         Labor = 1,
+         Temperatur = as.numeric(Temperatur)) |> 
   relocate(Liefermonat, .after = Temperatur) |> 
   relocate(Datum, .after = Liefermonat)
           
@@ -76,7 +77,8 @@ Temp2025_datumkor <- Temp2025_datum |>
   mutate(
     Datum = na_if(Datum, ""),
     ProbeEingangsdatum = na_if(ProbeEingangsdatum, ""),
-    Datum = coalesce(Datum, ProbeEingangsdatum)) |> 
+    Datum = coalesce(Datum, ProbeEingangsdatum),
+    Temperatur = as.numeric(Temperatur)) |> 
   select(-ProbeEingangsdatum)
 
 Temp2025_kor <- Temp2025_datumkor |> 
@@ -91,10 +93,11 @@ Datenbereinigung für das Jahr 2026
 ```{r}
 
 Temp2026_kor <- Temp2026 |> 
-  rename(Probenummer = Pro2nummer) |> 
+  rename(Probennummer = Pro2nummer) |> 
   mutate(
     Datum = dmy(Datum),
-    Liefermonat = month(Datum)) |> 
+    Liefermonat = month(Datum),
+    Temperatur = as.numeric(Temperatur)) |> 
   relocate(Liefermonat, .after = Temperatur) |> 
   relocate(Datum, .after = Liefermonat)
 
@@ -110,6 +113,7 @@ Temperaturdaten aller Jahre zusammenfügen
 
 ```{r}
 
+Temp2024bis2026 <- bind_rows(Temp2024_kor, Temp2025_kor, Temp2026_kor)
 ```
 
 Daten Meteo zusammenfügen
