@@ -1,0 +1,39 @@
+---
+title: "index.qmd"
+author: "Nina"
+format: html
+editor: visual
+---
+
+```{r}
+
+library(tidyverse)
+library(ggthemes)
+
+```
+
+# Einleitung
+
+## Daten
+
+```{r}
+
+Temp2024 <- read.csv2(here::here("daten/raw/TemperaturProbenankunft2024.csv"))
+Temp2025 <- read.csv2(here::here("daten/raw/TemperaturProbenankunft2025.csv"))
+Temp2026 <- read.csv2(here::here("daten/raw/TemperaturProbenankunft2026.csv"))
+Datum2025 <- read.csv2(here::here("daten/raw/EingangsdatumProben2025.csv"))
+
+Meteo2024 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2024.csv"))
+Meteo2025 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2025.csv"))
+Meteo2026 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
+```
+
+## Analyseziele
+
+# Daten Aufbereitung
+
+```{r}
+
+```
+
+# Daten Visualisierung
