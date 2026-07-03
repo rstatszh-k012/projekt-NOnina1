@@ -9,10 +9,14 @@ editor: visual
 
 library(tidyverse)
 library(ggthemes)
+library(dplyr)
+library(lubridate)
 
 ```
 
 # Einleitung
+
+Beim Probeneingang im Labor wird jeweils von den Proben die Eingangstemperatur gemessen. Die Proben werden generell in Isolierten Versandboxen mit Tiefkühlelementen versendet.
 
 ## Daten
 
@@ -30,17 +34,94 @@ Meteo2026 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
 
 ## Analyseziele
 
+Fragen:\
+Hat die Aussentemperatur einen Einfluss auf die Temperatur der Probenankunft im Labor?\
+Sieht man eine Tendenz bei den Verschiedenen Laboren?\
+
 # Daten Aufbereitung
+
+Datenbereinigun für das Jahr 2024
 
 ```{r}
 
 ```
+
+Datenbereinigung für das Jahr 2025
+
+```{r}
+
+Temp_2025 <- Temp2025 |> 
+  rename(Probennummer = Pro2.Nr,
+         Temperatur = Temperatur.Fleisch)
+  
+```
+
+```{r}
+
+Temp2025_datum <- left_join(Temp_2025, Datum2025, by = "Probennummer")
+
+Temp2025_datumkor <- Temp2025_datum |> 
+  mutate(
+    Datum = na_if(Datum, ""),
+    ProbeEingangsdatum = na_if(ProbeEingangsdatum, ""),
+    Datum = coalesce(Datum, ProbeEingangsdatum)) |> 
+  select(-ProbeEingangsdatum)
+
+Temp2025_kor <- Temp2025_datumkor |> 
+  mutate(Datum = dmy(Datum),
+         Monat = month(Datum),
+         Liefermonat = coalesce(Liefermonat, Monat)) |> 
+  select(-Monat)
+```
+
+Datenbereinigung für das Jahr 2026
+
+```{r}
+
+```
+
+Daten Meteo bereiningen
+
+```{r}
+
+```
+
+Temperaturdaten aller Jahre zusammenfügen
+
+```{r}
+
+```
+
+Daten Meteo zusammenfügen
+
+```{r}
+
+```
+
+Daten Meteo und Temperaturdaten zusammenfügen
+
+```{r}
+
+```
+
+Daten Speichern im processed Ordner
 
 ```{r}
 #wenn Daten bereinigt speichern hier ! noch anpassen mit dateiname
 
 write.csv(x = objekt_name,
           here::here("daten/processen/filename.csv"))
+b
 ```
 
 # Daten Visualisierung
+
+Anforderung:
+
+- Der Bericht enthält mindestens eine Datenvisualisierungen.
+
+- Jede Datenvisualisierung enthält bearbeitete menschenlesbare Beschriftungen (z.B. Achsenbeschriftungen, Legendentitel).
+
+- Jede Datenvisualisierung verwendet mindestens eine Skalierungsfunktion (z.B. Farbe/Füllung, Achsen).
+
+- Der Bericht enthält mindestens eine Tabelle mit deskriptiven Statistiken (z.B. Anzahl, Mittelwert, Median, Standardabweichung usw.)
