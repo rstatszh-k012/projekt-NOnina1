@@ -44,6 +44,18 @@ Datenbereinigun für das Jahr 2024
 
 ```{r}
 
+Temp2024_kor <- Temp2024 |> 
+  rename(Probennummer = Probe.Nr,
+         Temperatur = Temperatur.Fleisch) |> 
+   mutate(
+         Datum = sub(" abend 16:45", "", Datum),
+         Datum = dmy(Datum),
+         Liefermonat = month(Datum),
+         Labor = 1) |> 
+  relocate(Liefermonat, .after = Temperatur) |> 
+  relocate(Datum, .after = Liefermonat)
+          
+
 ```
 
 Datenbereinigung für das Jahr 2025
@@ -77,6 +89,14 @@ Temp2025_kor <- Temp2025_datumkor |>
 Datenbereinigung für das Jahr 2026
 
 ```{r}
+
+Temp2026_kor <- Temp2026 |> 
+  rename(Probenummer = Pro2nummer) |> 
+  mutate(
+    Datum = dmy(Datum),
+    Liefermonat = month(Datum)) |> 
+  relocate(Liefermonat, .after = Temperatur) |> 
+  relocate(Datum, .after = Liefermonat)
 
 ```
 
