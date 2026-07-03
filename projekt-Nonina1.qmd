@@ -36,4 +36,11 @@ Meteo2026 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
 
 ```
 
+```{r}
+#wenn Daten bereinigt speichern hier ! noch anpassen mit dateiname
+
+write.csv(x = objekt_name,
+          here::here("daten/processen/filename.csv"))
+```
+
 # Daten Visualisierung
