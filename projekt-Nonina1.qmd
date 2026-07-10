@@ -11,6 +11,7 @@ library(tidyverse)
 library(ggthemes)
 library(dplyr)
 library(lubridate)
+library(knitr)
 
 ```
 
@@ -146,13 +147,36 @@ Temp2024bis2026 <- bind_rows(Temp2024_kor, Temp2025_kor, Temp2026_kor)
 Daten Meteo zusammenfügen
 
 ```{r}
-
+Meteo2024bis2026 <- bind_rows(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)
 ```
 
-Temperaturtabelle
+Temperaturtabelle erstellen
 
 ```{r}
+Meteo2024bis2026_Saison <- Meteo2024bis2026 |> 
+  mutate(
+    Jahr = year(Datum),
+    Monat = month(Datum),
+    Saison = case_when(
+      Monat %in% c(12, 1, 2) ~ "Winter",
+      Monat %in% c(3, 4, 5) ~ "Frühling",
+      Monat %in% c(6, 7, 8) ~ "Sommer",
+      Monat %in% c(9, 10, 11) ~ "Herbst"))
 
+Meteo2024bis2026_Statistik <- Meteo2024bis2026_Saison |> 
+  group_by(Jahr) |> 
+  summarise(
+    Min_Temp = min(Wert, na.rm = TRUE),
+    Max_Temp = max(Wert, na.rm = TRUE),
+    Mittel_Temp = mean(Wert, na.rm = TRUE),
+    Frühling = mean(Wert[Saison == "Frühling"]),
+    Sommer = mean(Wert[Saison == "Sommer"]),
+    Herbst = mean(Wert[Saison == "Herbst"]),
+    Winter = mean(Wert[Saison == "Winter"]))
+
+kable(Meteo2024bis2026_Statistik,
+      digits = 1,
+      caption = "Jahres- und saisonale Temperaturstatistik 2024-2026")
 ```
 
 Daten Meteo und Temperaturdaten zusammenfügen
