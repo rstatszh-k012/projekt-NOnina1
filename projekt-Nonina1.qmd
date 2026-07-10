@@ -171,7 +171,7 @@ Temp2024bis2026 <- bind_rows(Temp2024_kor, Temp2025_kor, Temp2026_kor)
 Meteo2024bis2026 <- bind_rows(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)
 ```
 
-### Temperaturtabelle erstellen
+### Meteo-Temperaturtabelle erstellen
 
 ```{r}
 Meteo2024bis2026_Saison <- Meteo2024bis2026 |> 
@@ -182,7 +182,8 @@ Meteo2024bis2026_Saison <- Meteo2024bis2026 |>
       Monat %in% c(12, 1, 2) ~ "Winter",
       Monat %in% c(3, 4, 5) ~ "Frühling",
       Monat %in% c(6, 7, 8) ~ "Sommer",
-      Monat %in% c(9, 10, 11) ~ "Herbst"))
+      Monat %in% c(9, 10, 11) ~ "Herbst"),
+    Datum = as.Date(Datum))
 
 Meteo2024bis2026_Statistik <- Meteo2024bis2026_Saison |> 
   group_by(Jahr) |> 
@@ -204,15 +205,22 @@ kable(Meteo2024bis2026_Statistik,
 
 ```{r}
 
+Daten_gesammt <- Temp2024bis2026 |> 
+  left_join(Meteo2024bis2026_Saison, by = "Datum") |> 
+  rename(Aussentemperatur = Wert,
+         Monat_in_Zahl = Monat,
+         Probentemperatur = Temperatur) |> 
+  select(-Parameter, -Intervall, -Standort, -Status, -Einheit)
+
+
 ```
 
 ### Daten Speichern im processed Ordner
 
 ```{r}
-#wenn Daten bereinigt speichern hier ! noch anpassen mit dateiname
 
-#write.csv(x = objekt_name,
-          #here::here("daten/processen/filename.csv"))
+write.csv(x = Daten_gesammt,
+          here::here("daten/processed/Daten_gesammt.csv"))
 
 ```
 
