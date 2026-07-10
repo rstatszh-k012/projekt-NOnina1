@@ -227,7 +227,7 @@ write.csv(x = Daten_gesammt,
 
 # Daten Visualisierung
 
-Daten in ein Langes Format verwandeln
+### Daten in ein Langes Format verwandeln
 
 ```{r}
 
@@ -238,25 +238,33 @@ Daten_gesammt_long <- Daten_gesammt |>
     values_to = "Temperatur")
 ```
 
+### Verlauf der täglichen Aussen- und mittleren Probentemperatur
+
 ```{r}
+#| warning: false
 
 ggplot(data = Daten_gesammt_long, mapping = aes(
   x= Datum,
   y = Temperatur,
   color = Temperaturtyp)) +
-  geom_line() 
+  geom_line() +
+  labs(
+    title = "Verlauf der täglichen Aussen- und mittleren Probentemperatur",
+    subtitle = "Vom Jahr 2024 bis 2026"
+  ) +
+  theme_stat()
   
 ```
 
-Da der Obige Plot nicht wirklich schän ist, weil es für gewisse Tage mehrere Probentemperaturen gibt, erstellen wir zuerst den Mittelwert der Probentemperaturen pro Taag und erstellen dann den Plot erneut.
+Da der oben dargestellte Plot aufgrund mehrerer Probentemperaturmessungen an einzelnen Tagen unübersichtlich ist, werden im nächsten Schritt die Probentemperaturen pro Tag gemittelt. Anschliessend wird der Plot mit den berechneten Tagesmittelwerten erneut erstellt, um den Temperaturverlauf übersichtlicher darzustellen.
 
 ```{r}
 
 Daten_gesammt_TempproTag <- Daten_gesammt |> 
   group_by(Datum) |> 
-  mutate(
-    Probentemperatur_mean = round(mean(Probentemperatur, na.rm = TRUE), 1)) |> 
-  ungroup()
+  summarise(
+    Probentemperatur_mean = round(mean(Probentemperatur, na.rm = TRUE), 1),
+    Aussentemperatur = first(Aussentemperatur)) 
 ```
 
 ```{r}
@@ -269,12 +277,73 @@ Daten_gesammt_TempproTag_long <- Daten_gesammt_TempproTag |>
 ```
 
 ```{r}
+#| warning: false
 
 ggplot(data = Daten_gesammt_TempproTag_long, mapping = aes(
   x= Datum,
   y = Temperatur,
   color = Temperaturtyp)) +
   geom_line() +
+  scale_x_date(
+    date_breaks = "3 months",
+    date_labels = "%b %Y") +
+  labs(
+    title = "Verlauf der täglichen Aussen- und mittleren Probentemperatur",
+    subtitle = "Vom Jahr 2024 bis 2026"
+  ) +
+  theme_stat()+
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
+
+Die rote Linie steigt im Sommer auf über 30 °C und sinkt im Winter bis unter 0 °C. Das bestätigt, dass die Wetterdaten plausibel sind. Die türkise Linie steigt im Sommer ebenfalls etwas an, bleibt aber deutlich stabiler als die Aussentemperatur. Das spricht dafür, das die isolierten Versandboxen und die Kühlakkus einen kühlenden Effekt haben
+
+Auffällig sind einzelne kurzfristige Spitzen und Einbrüche in beiden Messreihen. Diese können durch kurzfristige Wetterereignisse, Messbedingungen oder einzelne Ausreisser in den Daten verursacht sein. Insgesamt ist jedoch ein klarer Zusammenhang zwischen Aussen- und Probentemperatur erkennbar: Steigende Aussentemperaturen führen zeitversetzt zu höheren Probentemperaturen, während sinkende Aussentemperaturen ebenfalls eine Abkühlung der Probe bewirken.
+
+Die hohe tägliche Variabilität erschwert die Erkennung langfristiger Trends, jedoch zeigt der Zeitraum von 2024 bis 2026 keinen eindeutigen kontinuierlichen Anstieg oder Rückgang der Temperaturen. Der dominierende Einflussfaktor ist der saisonale Jahresverlauf mit wiederkehrenden Sommer- und Winterperioden.
+
+### Zusammenhang zwischen Aussen- und Probentemperatur
+
+```{r}
+#| warning: false
+
+ggplot(data = Daten_gesammt, mapping = aes(
+  x = Aussentemperatur,
+  y = Probentemperatur)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    title = "Zusammenhang zwischen Aussen- und Probentemperatur",
+    x = "Aussentemperatur (°C)",
+    y = "Probentemperatur (°C)") +
+  theme_stat()
+```
+
+Auf diesem Plot erkennt man, dass je höher die Aussentemperatur ist, desto höher ist im Durchschnitt die Probentemperatur.\
+Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut sind, Das bedeutet, das die Aussentemperatur nur einen kleinen Teil der Unterschiede erklärt. Denn es gibt noch weitere Faktoren, die man ebenfalls beachten muss wie zum Beispiel, die Anzahl der Kühlakkus, die Transportdauer oder die Art der Probe.
+
+### Monatliche Verteilung der Probentemperaturen
+
+```{r}
+
+Daten_gesammt|> 
+  filter(!is.na(Probentemperatur))
+
+
+ggplot(data = Daten_gesammt, mapping = aes(
+  x = factor(Monat_in_Zahl),
+  y = Probentemperatur,
+  fill = factor(Jahr))) +
+  geom_boxplot() +
+  labs(
+    title = "Monatliche Verteilung der Probentemperaturen",
+    subtitle = "Vergleich der Jahre 2024 bis 2026",
+    x = "Monat",
+    y = "Probentemperatur (°C)",
+    fill = "Jahr"
+  ) +
   theme_stat()
 ```
 
