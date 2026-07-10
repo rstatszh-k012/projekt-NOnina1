@@ -32,6 +32,10 @@ Meteo2025 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2025.csv"))
 Meteo2026 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
 ```
 
+Herkunft der Daten:
+
+<https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte>
+
 ## Analyseziele
 
 Fragen:\
@@ -86,6 +90,8 @@ Temp2025_kor <- Temp2025_datumkor |>
          Monat = month(Datum),
          Liefermonat = coalesce(Liefermonat, Monat)) |> 
   select(-Monat)
+
+
 ```
 
 Datenbereinigung für das Jahr 2026
@@ -103,10 +109,31 @@ Temp2026_kor <- Temp2026 |>
 
 ```
 
-Daten Meteo bereiningen
+Daten Meteo bereiningen für das Jahr 2024
 
 ```{r}
 
+Meteo2024_kor <- Meteo2024 |> 
+  filter(Standort == "Zch_Heubeeribüel",
+         Parameter == "T_max_h1")
+```
+
+Daten Meteo bereiningen für das Jahr 2025
+
+```{r}
+
+Meteo2025_kor <- Meteo2025 |> 
+  filter(Standort == "Zch_Heubeeribüel",
+         Parameter == "T_max_h1")
+```
+
+Daten Meteo bereiningen für das Jahr 2026
+
+```{r}
+
+Meteo2026_kor <- Meteo2026 |> 
+  filter(Standort == "Zch_Heubeeribüel",
+         Parameter == "T_max_h1")
 ```
 
 Temperaturdaten aller Jahre zusammenfügen
@@ -117,6 +144,12 @@ Temp2024bis2026 <- bind_rows(Temp2024_kor, Temp2025_kor, Temp2026_kor)
 ```
 
 Daten Meteo zusammenfügen
+
+```{r}
+
+```
+
+Temperaturtabelle
 
 ```{r}
 
