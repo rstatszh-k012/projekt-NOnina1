@@ -6,6 +6,8 @@ editor: visual
 ---
 
 ```{r}
+#| echo: true
+#| message: false
 
 library(tidyverse)
 library(ggthemes)
@@ -17,9 +19,13 @@ library(knitr)
 
 # Einleitung
 
-Beim Probeneingang im Labor wird jeweils von den Proben die Eingangstemperatur gemessen. Die Proben werden generell in Isolierten Versandboxen mit Tiefkühlelementen versendet.
+Dieses Projekt entsteht im Rahmen vom **rstatsZH Kurs 012.**
+
+Im Labor wird beim Eingang von Proben routinemässig die Eingangstemperatur erfasst. Die Proben werden in der Regel in isolierten Versandboxen mit Tiefkühlelementen transportiert, um während des Versands geeignete Temperaturbedingungen sicherzustellen. Im Rahmen dieses Projekts werden die erfassten Temperaturdaten ausgewertet und analysiert.
 
 ## Daten
+
+### Laden der Daten
 
 ```{r}
 
@@ -33,21 +39,30 @@ Meteo2025 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2025.csv"))
 Meteo2026 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
 ```
 
-Herkunft der Daten:
+### Herkunft der Meteo Daten:
 
 <https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte>
 
+### Herkunft der Temperaturdaten
+
+Die Temperaturdaten wurden aus dem Datenbestand des Kantonalen Labors Zürich exportiert. Vor der Auswertung wurden die Daten entsprechend aufbereitet und anonymisiert. Der Datensatz enthält ausschliesslich die gemessenen Eingangstemperaturen, das Eingangsdatum, die Probennummer sowie das Labor, welches die jeweiligen Proben erhalten hat. Die Laborangaben wurden dabei durch numerische Kennzeichnungen anonymisiert.
+
 ## Analyseziele
 
-Fragen:\
-Hat die Aussentemperatur einen Einfluss auf die Temperatur der Probenankunft im Labor?\
-Sieht man eine Tendenz bei den Verschiedenen Laboren?\
+### Fragestellungen
+
+- Hat die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben bei der Ankunft im Labor?
+
+- Lassen sich Unterschiede oder Trends in den Eingangstemperaturen zwischen den verschiedenen Laboren erkennen?\
 
 # Daten Aufbereitung
 
-Datenbereinigun für das Jahr 2024
+### Datenbereinigun für das Jahr 2024
 
 ```{r}
+#| echo: true
+#| message: false
+#| warning: false
 
 Temp2024_kor <- Temp2024 |> 
   rename(Probennummer = Probe.Nr,
@@ -64,7 +79,7 @@ Temp2024_kor <- Temp2024 |>
 
 ```
 
-Datenbereinigung für das Jahr 2025
+### Datenbereinigung für das Jahr 2025
 
 ```{r}
 
@@ -75,6 +90,9 @@ Temp_2025 <- Temp2025 |>
 ```
 
 ```{r}
+#| echo: true
+#| message: false
+#| warning: false
 
 Temp2025_datum <- left_join(Temp_2025, Datum2025, by = "Probennummer")
 
@@ -95,9 +113,12 @@ Temp2025_kor <- Temp2025_datumkor |>
 
 ```
 
-Datenbereinigung für das Jahr 2026
+### Datenbereinigung für das Jahr 2026
 
 ```{r}
+#| echo: true
+#| message: false
+#| warning: false
 
 Temp2026_kor <- Temp2026 |> 
   rename(Probennummer = Pro2nummer) |> 
@@ -110,7 +131,7 @@ Temp2026_kor <- Temp2026 |>
 
 ```
 
-Daten Meteo bereiningen für das Jahr 2024
+### Daten Meteo bereiningen für das Jahr 2024
 
 ```{r}
 
@@ -119,7 +140,7 @@ Meteo2024_kor <- Meteo2024 |>
          Parameter == "T_max_h1")
 ```
 
-Daten Meteo bereiningen für das Jahr 2025
+### Daten Meteo bereiningen für das Jahr 2025
 
 ```{r}
 
@@ -128,7 +149,7 @@ Meteo2025_kor <- Meteo2025 |>
          Parameter == "T_max_h1")
 ```
 
-Daten Meteo bereiningen für das Jahr 2026
+### Daten Meteo bereiningen für das Jahr 2026
 
 ```{r}
 
@@ -137,20 +158,20 @@ Meteo2026_kor <- Meteo2026 |>
          Parameter == "T_max_h1")
 ```
 
-Temperaturdaten aller Jahre zusammenfügen
+### Temperaturdaten aller Jahre zusammenfügen
 
 ```{r}
 
 Temp2024bis2026 <- bind_rows(Temp2024_kor, Temp2025_kor, Temp2026_kor)
 ```
 
-Daten Meteo zusammenfügen
+### Daten Meteo zusammenfügen
 
 ```{r}
 Meteo2024bis2026 <- bind_rows(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)
 ```
 
-Temperaturtabelle erstellen
+### Temperaturtabelle erstellen
 
 ```{r}
 Meteo2024bis2026_Saison <- Meteo2024bis2026 |> 
@@ -179,20 +200,20 @@ kable(Meteo2024bis2026_Statistik,
       caption = "Jahres- und saisonale Temperaturstatistik 2024-2026")
 ```
 
-Daten Meteo und Temperaturdaten zusammenfügen
+### Daten Meteo und Temperaturdaten zusammenfügen
 
 ```{r}
 
 ```
 
-Daten Speichern im processed Ordner
+### Daten Speichern im processed Ordner
 
 ```{r}
 #wenn Daten bereinigt speichern hier ! noch anpassen mit dateiname
 
-write.csv(x = objekt_name,
-          here::here("daten/processen/filename.csv"))
-b
+#write.csv(x = objekt_name,
+          #here::here("daten/processen/filename.csv"))
+
 ```
 
 # Daten Visualisierung
