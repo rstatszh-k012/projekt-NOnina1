@@ -14,6 +14,7 @@ library(ggthemes)
 library(dplyr)
 library(lubridate)
 library(knitr)
+library(statR)
 
 ```
 
@@ -225,6 +226,57 @@ write.csv(x = Daten_gesammt,
 ```
 
 # Daten Visualisierung
+
+Daten in ein Langes Format verwandeln
+
+```{r}
+
+Daten_gesammt_long <- Daten_gesammt |> 
+  pivot_longer(
+    cols = c(Probentemperatur, Aussentemperatur),
+    names_to = "Temperaturtyp",
+    values_to = "Temperatur")
+```
+
+```{r}
+
+ggplot(data = Daten_gesammt_long, mapping = aes(
+  x= Datum,
+  y = Temperatur,
+  color = Temperaturtyp)) +
+  geom_line() 
+  
+```
+
+Da der Obige Plot nicht wirklich schän ist, weil es für gewisse Tage mehrere Probentemperaturen gibt, erstellen wir zuerst den Mittelwert der Probentemperaturen pro Taag und erstellen dann den Plot erneut.
+
+```{r}
+
+Daten_gesammt_TempproTag <- Daten_gesammt |> 
+  group_by(Datum) |> 
+  mutate(
+    Probentemperatur_mean = round(mean(Probentemperatur, na.rm = TRUE), 1)) |> 
+  ungroup()
+```
+
+```{r}
+
+Daten_gesammt_TempproTag_long <- Daten_gesammt_TempproTag |> 
+  pivot_longer(
+    cols = c(Probentemperatur_mean, Aussentemperatur),
+    names_to = "Temperaturtyp",
+    values_to = "Temperatur")
+```
+
+```{r}
+
+ggplot(data = Daten_gesammt_TempproTag_long, mapping = aes(
+  x= Datum,
+  y = Temperatur,
+  color = Temperaturtyp)) +
+  geom_line() +
+  theme_stat()
+```
 
 Anforderung:
 

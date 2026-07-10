@@ -1,4 +1,4 @@
-"","Probennummer","Temperatur","Liefermonat","Datum","Labor","Aussentemperatur","Jahr","Monat_in_Zahl","Saison"
+"","Probennummer","Probentemperatur","Liefermonat","Datum","Labor","Aussentemperatur","Jahr","Monat_in_Zahl","Saison"
 "1",1469,14,2,2024-02-20,1,8.24,2024,2,"Winter"
 "2",3252,4,2,2024-02-20,1,8.24,2024,2,"Winter"
 "3",3531,3,2,2024-02-20,1,8.24,2024,2,"Winter"
