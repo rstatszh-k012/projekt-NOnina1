@@ -106,9 +106,10 @@ Temp2025_datumkor <- Temp2025_datum |>
   select(-ProbeEingangsdatum)
 
 Temp2025_kor <- Temp2025_datumkor |> 
-  mutate(Datum = dmy(Datum),
-         Monat = month(Datum),
-         Liefermonat = coalesce(Liefermonat, Monat)) |> 
+  mutate(
+    Datum = dmy(Datum),
+    Monat = month(Datum),
+    Liefermonat = coalesce(Liefermonat, Monat)) |> 
   select(-Monat)
 
 
@@ -178,12 +179,12 @@ Meteo2024bis2026 <- bind_rows(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)
 Meteo2024bis2026_Saison <- Meteo2024bis2026 |> 
   mutate(
     Jahr = year(Datum),
-    Monat = month(Datum),
+    Monatmeteo = month(Datum),
     Saison = case_when(
-      Monat %in% c(12, 1, 2) ~ "Winter",
-      Monat %in% c(3, 4, 5) ~ "Frühling",
-      Monat %in% c(6, 7, 8) ~ "Sommer",
-      Monat %in% c(9, 10, 11) ~ "Herbst"),
+      Monatmeteo %in% c(12, 1, 2) ~ "Winter",
+      Monatmeteo %in% c(3, 4, 5) ~ "Frühling",
+      Monatmeteo %in% c(6, 7, 8) ~ "Sommer",
+      Monatmeteo %in% c(9, 10, 11) ~ "Herbst"),
     Datum = as.Date(Datum))
 
 Meteo2024bis2026_Statistik <- Meteo2024bis2026_Saison |> 
@@ -209,9 +210,10 @@ kable(Meteo2024bis2026_Statistik,
 Daten_gesammt <- Temp2024bis2026 |> 
   left_join(Meteo2024bis2026_Saison, by = "Datum") |> 
   rename(Aussentemperatur = Wert,
-         Monat_in_Zahl = Monat,
-         Probentemperatur = Temperatur) |> 
-  select(-Parameter, -Intervall, -Standort, -Status, -Einheit)
+         Monat_in_Zahl = Monatmeteo,
+         Probentemperatur = Temperatur,
+         Jahr = Jahr.x) |> 
+  select(-Parameter, -Intervall, -Standort, -Status, -Einheit, -Jahr.y, -Monat_in_Zahl)
 
 
 ```
@@ -332,18 +334,18 @@ Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut
 
 Daten_gesammt_ohneNA <- Daten_gesammt|> 
   filter(!is.na(Probentemperatur),
-        !is.na(Datum))
+         !is.na(Liefermonat))
 
 
 ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
-  x = factor(Monat_in_Zahl),
+  x = factor(Liefermonat),
   y = Probentemperatur,
   fill = factor(Jahr))) +
   geom_boxplot() +
   labs(
     title = "Monatliche Verteilung der Probentemperaturen",
     subtitle = "Vergleich der Jahre 2024 bis 2026",
-    x = "Monat",
+    x = "Liefermonat",
     y = "Probentemperatur (°C)",
     fill = "Jahr"
   ) +
@@ -351,6 +353,45 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
 ```
 
 Die grafische Auswertung zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.
+
+### Verteilung der Probentemperatur nach Labor
+
+```{r}
+
+ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
+  x = as.factor(Labor),
+  y = Probentemperatur)) +
+  geom_boxplot(fill = "skyblue") +
+  labs(
+    title = "Verteilung der Probentemperatur nach Labor",
+    x = "Labor",
+    y = "Probentemperatur (°C)") +
+  theme_stat()
+```
+
+Die Verteilung der Probentemperaturen unterscheidet sich zwischen den Laboren. Während Labor 1 und Labor 2 vergleichbare Medianwerte aufweisen, zeigt Labor 3 insgesamt höhere Eingangstemperaturen. Zudem weist Labor 1 eine größere Variabilität sowie mehrere hohe Ausreißer auf.
+
+### Verteilung der Probentemperatur nach Labor und Jahr
+
+```{r}
+
+ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
+  x = as.factor(Labor),
+  y = Probentemperatur,
+  fill = as.factor(Jahr))) +
+  geom_boxplot(fill = "skyblue") +
+  facet_wrap(~Jahr) +
+  labs(
+    title = "Probentemperatur nach Labor und Jahr",
+    x = "Labor",
+    y = " Probentemperatur (°C)",
+    fill = "Jahr") +
+  theme_stat()
+```
+
+Die Boxplots zeigen die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt bleibt das Muster über die Jahre weitgehend konstant: Labor 3 verzeichnet die höchsten Temperaturen, Labor 1 die grösste Variabilität und Labor 2 liegt hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren. Die beobachteten Unterschiede können auf verschiedene Probenarten, Transportbedingungen oder unterschiedliche Abläufe in den Laboren zurückzuführen sein.
+
+# Schlussfolgerung
 
 Anforderung:
 
