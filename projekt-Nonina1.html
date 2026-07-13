@@ -111,13 +111,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="einleitung" class="level1">
 <h1>Einleitung</h1>
-<p>Beim Probeneingang im Labor wird jeweils von den Proben die Eingangstemperatur gemessen. Die Proben werden generell in Isolierten Versandboxen mit Tiefkühlelementen versendet.</p>
+<p>Dieses Projekt entsteht im Rahmen vom <strong>rstatsZH Kurs 012.</strong></p>
+<p>Im Labor wird beim Eingang von Proben routinemässig die Eingangstemperatur erfasst. Die Proben werden in der Regel in isolierten Versandboxen mit Tiefkühlelementen transportiert, um während des Versands geeignete Temperaturbedingungen sicherzustellen. Im Rahmen dieses Projekts werden die erfassten Temperaturdaten ausgewertet und analysiert.</p>
 <section id="daten" class="level2">
 <h2 class="anchored" data-anchor-id="daten">Daten</h2>
+<section id="laden-der-daten" class="level3">
+<h3 class="anchored" data-anchor-id="laden-der-daten">Laden der Daten</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Temp2024 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2024.csv"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Temp2025 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2025.csv"</span>))</span>
@@ -128,20 +132,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Meteo2025 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2025.csv"</span>))</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Meteo2026 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2026.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Herkunft der Meteo Daten:</p>
+</section>
+<section id="herkunft-der-meteo-daten" class="level3">
+<h3 class="anchored" data-anchor-id="herkunft-der-meteo-daten">Herkunft der Meteo Daten:</h3>
 <p><a href="https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte" class="uri">https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte</a></p>
+</section>
+<section id="herkunft-der-temperaturdaten" class="level3">
+<h3 class="anchored" data-anchor-id="herkunft-der-temperaturdaten">Herkunft der Temperaturdaten</h3>
+<p>Die Temperaturdaten wurden aus dem Datenbestand des Kantonalen Labors Zürich exportiert. Vor der Auswertung wurden die Daten entsprechend aufbereitet und anonymisiert. Der Datensatz enthält ausschliesslich die gemessenen Eingangstemperaturen, das Eingangsdatum, die Probennummer sowie das Labor, welches die jeweiligen Proben erhalten hat. Die Laborangaben wurden dabei durch numerische Kennzeichnungen anonymisiert.</p>
+</section>
 </section>
 <section id="analyseziele" class="level2">
 <h2 class="anchored" data-anchor-id="analyseziele">Analyseziele</h2>
-<p>Fragen:<br>
-Hat die Aussentemperatur einen Einfluss auf die Temperatur der Probenankunft im Labor?<br>
-Sieht man eine Tendenz bei den Verschiedenen Laboren?<br>
-</p>
+<section id="fragestellungen" class="level3">
+<h3 class="anchored" data-anchor-id="fragestellungen">Fragestellungen</h3>
+<ul>
+<li><p>Hat die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben bei der Ankunft im Labor?</p></li>
+<li><p>Lassen sich Unterschiede oder Trends in den Eingangstemperaturen zwischen den verschiedenen Laboren erkennen?<br>
+</p></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="daten-aufbereitung" class="level1">
 <h1>Daten Aufbereitung</h1>
-<p>Datenbereinigun für das Jahr 2024</p>
+<section id="datenbereinigun-für-das-jahr-2024" class="level3">
+<h3 class="anchored" data-anchor-id="datenbereinigun-für-das-jahr-2024">Datenbereinigun für das Jahr 2024</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Temp2024_kor <span class="ot">&lt;-</span> Temp2024 <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Probe.Nr,</span>
@@ -155,7 +171,9 @@ Sieht man eine Tendenz bei den Verschiedenen Laboren?<br>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Liefermonat, <span class="at">.after =</span> Temperatur) <span class="sc">|&gt;</span> </span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Datum, <span class="at">.after =</span> Liefermonat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Datenbereinigung für das Jahr 2025</p>
+</section>
+<section id="datenbereinigung-für-das-jahr-2025" class="level3">
+<h3 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2025">Datenbereinigung für das Jahr 2025</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Temp_2025 <span class="ot">&lt;-</span> Temp2025 <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Pro2.Nr,</span>
@@ -178,7 +196,9 @@ Sieht man eine Tendenz bei den Verschiedenen Laboren?<br>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">Liefermonat =</span> <span class="fu">coalesce</span>(Liefermonat, Monat)) <span class="sc">|&gt;</span> </span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Monat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Datenbereinigung für das Jahr 2026</p>
+</section>
+<section id="datenbereinigung-für-das-jahr-2026" class="level3">
+<h3 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2026">Datenbereinigung für das Jahr 2026</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Temp2026_kor <span class="ot">&lt;-</span> Temp2026 <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Pro2nummer) <span class="sc">|&gt;</span> </span>
@@ -189,33 +209,45 @@ Sieht man eine Tendenz bei den Verschiedenen Laboren?<br>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Liefermonat, <span class="at">.after =</span> Temperatur) <span class="sc">|&gt;</span> </span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Datum, <span class="at">.after =</span> Liefermonat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Daten Meteo bereiningen für das Jahr 2024</p>
+</section>
+<section id="daten-meteo-bereiningen-für-das-jahr-2024" class="level3">
+<h3 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2024">Daten Meteo bereiningen für das Jahr 2024</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Meteo2024_kor <span class="ot">&lt;-</span> Meteo2024 <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Standort <span class="sc">==</span> <span class="st">"Zch_Heubeeribüel"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         Parameter <span class="sc">==</span> <span class="st">"T_max_h1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Daten Meteo bereiningen für das Jahr 2025</p>
+</section>
+<section id="daten-meteo-bereiningen-für-das-jahr-2025" class="level3">
+<h3 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2025">Daten Meteo bereiningen für das Jahr 2025</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Meteo2025_kor <span class="ot">&lt;-</span> Meteo2025 <span class="sc">|&gt;</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Standort <span class="sc">==</span> <span class="st">"Zch_Heubeeribüel"</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         Parameter <span class="sc">==</span> <span class="st">"T_max_h1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Daten Meteo bereiningen für das Jahr 2026</p>
+</section>
+<section id="daten-meteo-bereiningen-für-das-jahr-2026" class="level3">
+<h3 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2026">Daten Meteo bereiningen für das Jahr 2026</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Meteo2026_kor <span class="ot">&lt;-</span> Meteo2026 <span class="sc">|&gt;</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Standort <span class="sc">==</span> <span class="st">"Zch_Heubeeribüel"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         Parameter <span class="sc">==</span> <span class="st">"T_max_h1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Temperaturdaten aller Jahre zusammenfügen</p>
+</section>
+<section id="temperaturdaten-aller-jahre-zusammenfügen" class="level3">
+<h3 class="anchored" data-anchor-id="temperaturdaten-aller-jahre-zusammenfügen">Temperaturdaten aller Jahre zusammenfügen</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Temp2024bis2026 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(Temp2024_kor, Temp2025_kor, Temp2026_kor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Daten Meteo zusammenfügen</p>
+</section>
+<section id="daten-meteo-zusammenfügen" class="level3">
+<h3 class="anchored" data-anchor-id="daten-meteo-zusammenfügen">Daten Meteo zusammenfügen</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Meteo2024bis2026 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Temperaturtabelle erstellen</p>
+</section>
+<section id="meteo-temperaturtabelle-erstellen" class="level3">
+<h3 class="anchored" data-anchor-id="meteo-temperaturtabelle-erstellen">Meteo-Temperaturtabelle erstellen</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Meteo2024bis2026_Saison <span class="ot">&lt;-</span> Meteo2024bis2026 <span class="sc">|&gt;</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -225,22 +257,23 @@ Sieht man eine Tendenz bei den Verschiedenen Laboren?<br>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      Monat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>) <span class="sc">~</span> <span class="st">"Winter"</span>,</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      Monat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="sc">~</span> <span class="st">"Frühling"</span>,</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      Monat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>) <span class="sc">~</span> <span class="st">"Sommer"</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      Monat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>) <span class="sc">~</span> <span class="st">"Herbst"</span>))</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Meteo2024bis2026_Statistik <span class="ot">&lt;-</span> Meteo2024bis2026_Saison <span class="sc">|&gt;</span> </span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr) <span class="sc">|&gt;</span> </span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min_Temp =</span> <span class="fu">min</span>(Wert, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max_Temp =</span> <span class="fu">max</span>(Wert, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mittel_Temp =</span> <span class="fu">mean</span>(Wert, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    Frühling <span class="ot">=</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Frühling"</span>]),</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sommer =</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Sommer"</span>]),</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Herbst =</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Herbst"</span>]),</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">Winter =</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Winter"</span>]))</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Meteo2024bis2026_Statistik,</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">1</span>,</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Jahres- und saisonale Temperaturstatistik 2024-2026"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      Monat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>) <span class="sc">~</span> <span class="st">"Herbst"</span>),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Datum =</span> <span class="fu">as.Date</span>(Datum))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>Meteo2024bis2026_Statistik <span class="ot">&lt;-</span> Meteo2024bis2026_Saison <span class="sc">|&gt;</span> </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr) <span class="sc">|&gt;</span> </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min_Temp =</span> <span class="fu">min</span>(Wert, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max_Temp =</span> <span class="fu">max</span>(Wert, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mittel_Temp =</span> <span class="fu">mean</span>(Wert, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    Frühling <span class="ot">=</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Frühling"</span>]),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sommer =</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Sommer"</span>]),</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">Herbst =</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Herbst"</span>]),</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Winter =</span> <span class="fu">mean</span>(Wert[Saison <span class="sc">==</span> <span class="st">"Winter"</span>]))</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Meteo2024bis2026_Statistik,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">1</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Jahres- und saisonale Temperaturstatistik 2024-2026"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>Jahres- und saisonale Temperaturstatistik 2024-2026</caption>
@@ -301,17 +334,158 @@ Sieht man eine Tendenz bei den Verschiedenen Laboren?<br>
 </table>
 </div>
 </div>
-<p>Daten Meteo und Temperaturdaten zusammenfügen</p>
-<p>Daten Speichern im processed Ordner</p>
+</section>
+<section id="daten-meteo-und-temperaturdaten-zusammenfügen" class="level3">
+<h3 class="anchored" data-anchor-id="daten-meteo-und-temperaturdaten-zusammenfügen">Daten Meteo und Temperaturdaten zusammenfügen</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#wenn Daten bereinigt speichern hier ! noch anpassen mit dateiname</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#write.csv(x = objekt_name,</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>          <span class="co">#here::here("daten/processen/filename.csv"))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt <span class="ot">&lt;-</span> Temp2024bis2026 <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(Meteo2024bis2026_Saison, <span class="at">by =</span> <span class="st">"Datum"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Aussentemperatur =</span> Wert,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Monat_in_Zahl =</span> Monat,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Probentemperatur =</span> Temperatur) <span class="sc">|&gt;</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Parameter, <span class="sc">-</span>Intervall, <span class="sc">-</span>Standort, <span class="sc">-</span>Status, <span class="sc">-</span>Einheit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="daten-speichern-im-processed-ordner" class="level3">
+<h3 class="anchored" data-anchor-id="daten-speichern-im-processed-ordner">Daten Speichern im processed Ordner</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> Daten_gesammt,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>          here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/Daten_gesammt.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
 </section>
 <section id="daten-visualisierung" class="level1">
 <h1>Daten Visualisierung</h1>
+<section id="daten-in-ein-langes-format-verwandeln" class="level3">
+<h3 class="anchored" data-anchor-id="daten-in-ein-langes-format-verwandeln">Daten in ein Langes Format verwandeln</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt_long <span class="ot">&lt;-</span> Daten_gesammt <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(Probentemperatur, Aussentemperatur),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Temperaturtyp"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Temperatur"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="verlauf-der-täglichen-aussen--und-mittleren-probentemperatur" class="level3">
+<h3 class="anchored" data-anchor-id="verlauf-der-täglichen-aussen--und-mittleren-probentemperatur">Verlauf der täglichen Aussen- und mittleren Probentemperatur</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt_long, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span> Datum,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> Temperatur,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> Temperaturtyp)) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Verlauf der täglichen Aussen- und mittleren Probentemperatur"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Vom Jahr 2024 bis 2026"</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Da der oben dargestellte Plot aufgrund mehrerer Probentemperaturmessungen an einzelnen Tagen unübersichtlich ist, werden im nächsten Schritt die Probentemperaturen pro Tag gemittelt. Anschliessend wird der Plot mit den berechneten Tagesmittelwerten erneut erstellt, um den Temperaturverlauf übersichtlicher darzustellen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt_TempproTag <span class="ot">&lt;-</span> Daten_gesammt <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Datum) <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Probentemperatur_mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(Probentemperatur, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Aussentemperatur =</span> <span class="fu">first</span>(Aussentemperatur)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt_TempproTag_long <span class="ot">&lt;-</span> Daten_gesammt_TempproTag <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(Probentemperatur_mean, Aussentemperatur),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Temperaturtyp"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Temperatur"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt_TempproTag_long, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span> Datum,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> Temperatur,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> Temperaturtyp)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_breaks =</span> <span class="st">"3 months"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_labels =</span> <span class="st">"%b %Y"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Verlauf der täglichen Aussen- und mittleren Probentemperatur"</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Vom Jahr 2024 bis 2026"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Probenankunft"</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Temperatur (°C)"</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()<span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Die rote Linie steigt im Sommer auf über 30 °C und sinkt im Winter bis unter 0 °C. Das bestätigt, dass die Wetterdaten plausibel sind. Die türkise Linie steigt im Sommer ebenfalls etwas an, bleibt aber deutlich stabiler als die Aussentemperatur. Das spricht dafür, das die isolierten Versandboxen und die Kühlakkus einen kühlenden Effekt haben</p>
+<p>Auffällig sind einzelne kurzfristige Spitzen und Einbrüche in beiden Messreihen. Diese können durch kurzfristige Wetterereignisse, Messbedingungen oder einzelne Ausreisser in den Daten verursacht sein. Insgesamt ist jedoch ein klarer Zusammenhang zwischen Aussen- und Probentemperatur erkennbar: Steigende Aussentemperaturen führen zeitversetzt zu höheren Probentemperaturen, während sinkende Aussentemperaturen ebenfalls eine Abkühlung der Probe bewirken.</p>
+<p>Die hohe tägliche Variabilität erschwert die Erkennung langfristiger Trends, jedoch zeigt der Zeitraum von 2024 bis 2026 keinen eindeutigen kontinuierlichen Anstieg oder Rückgang der Temperaturen. Der dominierende Einflussfaktor ist der saisonale Jahresverlauf mit wiederkehrenden Sommer- und Winterperioden.</p>
+</section>
+<section id="zusammenhang-zwischen-aussen--und-probentemperatur" class="level3">
+<h3 class="anchored" data-anchor-id="zusammenhang-zwischen-aussen--und-probentemperatur">Zusammenhang zwischen Aussen- und Probentemperatur</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> Aussentemperatur,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> Probentemperatur)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Zusammenhang zwischen Aussen- und Probentemperatur"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Aussentemperatur (°C)"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probentemperatur (°C)"</span>) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Auf diesem Plot erkennt man, dass je höher die Aussentemperatur ist, desto höher ist im Durchschnitt die Probentemperatur.<br>
+Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut sind, Das bedeutet, das die Aussentemperatur nur einen kleinen Teil der Unterschiede erklärt. Denn es gibt noch weitere Faktoren, die man ebenfalls beachten muss wie zum Beispiel, die Anzahl der Kühlakkus, die Transportdauer oder die Art der Probe.</p>
+</section>
+<section id="monatliche-verteilung-der-probentemperaturen" class="level3">
+<h3 class="anchored" data-anchor-id="monatliche-verteilung-der-probentemperaturen">Monatliche Verteilung der Probentemperaturen</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt_ohneNA <span class="ot">&lt;-</span> Daten_gesammt<span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Probentemperatur),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="sc">!</span><span class="fu">is.na</span>(Datum))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt_ohneNA, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">factor</span>(Monat_in_Zahl),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> Probentemperatur,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">factor</span>(Jahr))) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Monatliche Verteilung der Probentemperaturen"</span>,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Vergleich der Jahre 2024 bis 2026"</span>,</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Monat"</span>,</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probentemperatur (°C)"</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Jahr"</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Die grafische Auswertung zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.</p>
 <p>Anforderung:</p>
 <ul>
 <li><p>Der Bericht enthält mindestens eine Datenvisualisierungen.</p></li>
@@ -319,6 +493,7 @@ Sieht man eine Tendenz bei den Verschiedenen Laboren?<br>
 <li><p>Jede Datenvisualisierung verwendet mindestens eine Skalierungsfunktion (z.B. Farbe/Füllung, Achsen).</p></li>
 <li><p>Der Bericht enthält mindestens eine Tabelle mit deskriptiven Statistiken (z.B. Anzahl, Mittelwert, Median, Standardabweichung usw.)</p></li>
 </ul>
+</section>
 </section>
 
 </main>

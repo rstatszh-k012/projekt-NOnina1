@@ -289,7 +289,9 @@ ggplot(data = Daten_gesammt_TempproTag_long, mapping = aes(
     date_labels = "%b %Y") +
   labs(
     title = "Verlauf der täglichen Aussen- und mittleren Probentemperatur",
-    subtitle = "Vom Jahr 2024 bis 2026"
+    subtitle = "Vom Jahr 2024 bis 2026",
+    x = "Probenankunft",
+    y = "Temperatur (°C)"
   ) +
   theme_stat()+
   theme(
@@ -328,11 +330,12 @@ Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut
 
 ```{r}
 
-Daten_gesammt|> 
-  filter(!is.na(Probentemperatur))
+Daten_gesammt_ohneNA <- Daten_gesammt|> 
+  filter(!is.na(Probentemperatur),
+        !is.na(Datum))
 
 
-ggplot(data = Daten_gesammt, mapping = aes(
+ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
   x = factor(Monat_in_Zahl),
   y = Probentemperatur,
   fill = factor(Jahr))) +
@@ -346,6 +349,8 @@ ggplot(data = Daten_gesammt, mapping = aes(
   ) +
   theme_stat()
 ```
+
+Die grafische Auswertung zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.
 
 Anforderung:
 
