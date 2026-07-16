@@ -3,6 +3,7 @@ title: "index.qmd"
 author: "Nina"
 format: html
 editor: visual
+lang: de
 ---
 
 ```{r}
@@ -176,6 +177,10 @@ Meteo2024bis2026 <- bind_rows(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)
 ### Meteo-Temperaturtabelle erstellen
 
 ```{r}
+#| label: tbl-Temperaturstatistik
+#| tbl-cap: Jahres- und saisonale Temperaturstatistik 2024-2026
+
+
 Meteo2024bis2026_Saison <- Meteo2024bis2026 |> 
   mutate(
     Jahr = year(Datum),
@@ -202,6 +207,8 @@ kable(Meteo2024bis2026_Statistik,
       digits = 1,
       caption = "Jahres- und saisonale Temperaturstatistik 2024-2026")
 ```
+
+Die @tbl-Temperaturstatistik zeigt, dass die mittlere Jahrestemperatur im Zeitraum 2024–2026 mit etwa 14,1–14,3 °C nahezu konstant blieb. Die höchste Maximaltemperatur wurde 2026 mit 35,5 °C gemessen, während die niedrigste Minimaltemperatur ebenfalls 2026 mit -5,3 °C auftrat. Die Sommer waren durchgehend die wärmste Jahreszeit, wobei 2026 mit durchschnittlich 26,4 °C den höchsten Sommermittelwert erreichte
 
 ### Daten Meteo und Temperaturdaten zusammenfügen
 
@@ -244,6 +251,8 @@ Daten_gesammt_long <- Daten_gesammt |>
 
 ```{r}
 #| warning: false
+#| label: fig-Verlauf_aussenProbe
+#| fig-cap: "Verlauf der täglichen Aussen- und mittleren Probentemperatur"
 
 ggplot(data = Daten_gesammt_long, mapping = aes(
   x= Datum,
@@ -258,7 +267,7 @@ ggplot(data = Daten_gesammt_long, mapping = aes(
   
 ```
 
-Da der oben dargestellte Plot aufgrund mehrerer Probentemperaturmessungen an einzelnen Tagen unübersichtlich ist, werden im nächsten Schritt die Probentemperaturen pro Tag gemittelt. Anschliessend wird der Plot mit den berechneten Tagesmittelwerten erneut erstellt, um den Temperaturverlauf übersichtlicher darzustellen.
+Da die dargestellte @fig-Verlauf_aussenProbe aufgrund mehrerer Probentemperaturmessungen an einzelnen Tagen unübersichtlich ist, werden im nächsten Schritt die Probentemperaturen pro Tag gemittelt. Anschliessend wird der Plot mit den berechneten Tagesmittelwerten erneut erstellt, um den Temperaturverlauf übersichtlicher darzustellen.
 
 ```{r}
 
@@ -392,13 +401,3 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
 Die Boxplots zeigen die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt bleibt das Muster über die Jahre weitgehend konstant: Labor 3 verzeichnet die höchsten Temperaturen, Labor 1 die grösste Variabilität und Labor 2 liegt hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren. Die beobachteten Unterschiede können auf verschiedene Probenarten, Transportbedingungen oder unterschiedliche Abläufe in den Laboren zurückzuführen sein.
 
 # Schlussfolgerung
-
-Anforderung:
-
-- Der Bericht enthält mindestens eine Datenvisualisierungen.
-
-- Jede Datenvisualisierung enthält bearbeitete menschenlesbare Beschriftungen (z.B. Achsenbeschriftungen, Legendentitel).
-
-- Jede Datenvisualisierung verwendet mindestens eine Skalierungsfunktion (z.B. Farbe/Füllung, Achsen).
-
-- Der Bericht enthält mindestens eine Tabelle mit deskriptiven Statistiken (z.B. Anzahl, Mittelwert, Median, Standardabweichung usw.)
