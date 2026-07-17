@@ -1,9 +1,11 @@
 ---
-title: "index.qmd"
+title: "Abschlussprojekt Nonina1.qmd"
 author: "Nina"
 format: html
+toc: true
 editor: visual
 lang: de
+date: 2026.07.30
 ---
 
 ```{r}
@@ -25,9 +27,17 @@ Dieses Projekt entsteht im Rahmen vom **rstatsZH Kurs 012.**
 
 Im Labor wird beim Eingang von Proben routinemässig die Eingangstemperatur erfasst. Die Proben werden in der Regel in isolierten Versandboxen mit Tiefkühlelementen transportiert, um während des Versands geeignete Temperaturbedingungen sicherzustellen. Im Rahmen dieses Projekts werden die erfassten Temperaturdaten ausgewertet und analysiert.
 
-## Daten
+# Analyseziele
 
-### Laden der Daten
+## Fragestellungen
+
+- Hat die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben bei der Ankunft im Labor?
+
+- Lassen sich Unterschiede oder Trends in den Eingangstemperaturen zwischen den verschiedenen Laboren erkennen?
+
+# Daten
+
+## Laden der Daten
 
 ```{r}
 
@@ -41,25 +51,17 @@ Meteo2025 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2025.csv"))
 Meteo2026 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
 ```
 
-### Herkunft der Meteo Daten:
+## Herkunft der Meteo Daten:
 
 <https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte>
 
-### Herkunft der Temperaturdaten
+## Herkunft der Temperaturdaten
 
 Die Temperaturdaten wurden aus dem Datenbestand des Kantonalen Labors Zürich exportiert. Vor der Auswertung wurden die Daten entsprechend aufbereitet und anonymisiert. Der Datensatz enthält ausschliesslich die gemessenen Eingangstemperaturen, das Eingangsdatum, die Probennummer sowie das Labor, welches die jeweiligen Proben erhalten hat. Die Laborangaben wurden dabei durch numerische Kennzeichnungen anonymisiert.
 
-## Analyseziele
-
-### Fragestellungen
-
-- Hat die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben bei der Ankunft im Labor?
-
-- Lassen sich Unterschiede oder Trends in den Eingangstemperaturen zwischen den verschiedenen Laboren erkennen?\
-
 # Daten Aufbereitung
 
-### Datenbereinigun für das Jahr 2024
+## Datenbereinigung für das Jahr 2024
 
 ```{r}
 #| echo: true
@@ -81,7 +83,7 @@ Temp2024_kor <- Temp2024 |>
 
 ```
 
-### Datenbereinigung für das Jahr 2025
+## Datenbereinigung für das Jahr 2025
 
 ```{r}
 
@@ -116,7 +118,7 @@ Temp2025_kor <- Temp2025_datumkor |>
 
 ```
 
-### Datenbereinigung für das Jahr 2026
+## Datenbereinigung für das Jahr 2026
 
 ```{r}
 #| echo: true
@@ -134,7 +136,7 @@ Temp2026_kor <- Temp2026 |>
 
 ```
 
-### Daten Meteo bereiningen für das Jahr 2024
+## Daten Meteo bereiningen für das Jahr 2024
 
 ```{r}
 
@@ -143,7 +145,7 @@ Meteo2024_kor <- Meteo2024 |>
          Parameter == "T_max_h1")
 ```
 
-### Daten Meteo bereiningen für das Jahr 2025
+## Daten Meteo bereiningen für das Jahr 2025
 
 ```{r}
 
@@ -152,7 +154,7 @@ Meteo2025_kor <- Meteo2025 |>
          Parameter == "T_max_h1")
 ```
 
-### Daten Meteo bereiningen für das Jahr 2026
+## Daten Meteo bereiningen für das Jahr 2026
 
 ```{r}
 
@@ -161,20 +163,20 @@ Meteo2026_kor <- Meteo2026 |>
          Parameter == "T_max_h1")
 ```
 
-### Temperaturdaten aller Jahre zusammenfügen
+## Temperaturdaten aller Jahre zusammenfügen
 
 ```{r}
 
 Temp2024bis2026 <- bind_rows(Temp2024_kor, Temp2025_kor, Temp2026_kor)
 ```
 
-### Daten Meteo zusammenfügen
+## Daten Meteo zusammenfügen
 
 ```{r}
 Meteo2024bis2026 <- bind_rows(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)
 ```
 
-### Meteo-Temperaturtabelle erstellen
+## Meteo-Temperaturtabelle erstellen
 
 ```{r}
 #| label: tbl-Temperaturstatistik
@@ -210,7 +212,7 @@ kable(Meteo2024bis2026_Statistik,
 
 Die @tbl-Temperaturstatistik zeigt, dass die mittlere Jahrestemperatur im Zeitraum 2024–2026 mit etwa 14,1–14,3 °C nahezu konstant blieb. Die höchste Maximaltemperatur wurde 2026 mit 35,5 °C gemessen, während die niedrigste Minimaltemperatur ebenfalls 2026 mit -5,3 °C auftrat. Die Sommer waren durchgehend die wärmste Jahreszeit, wobei 2026 mit durchschnittlich 26,4 °C den höchsten Sommermittelwert erreichte
 
-### Daten Meteo und Temperaturdaten zusammenfügen
+## Daten Meteo und Temperaturdaten zusammenfügen
 
 ```{r}
 
@@ -225,7 +227,7 @@ Daten_gesammt <- Temp2024bis2026 |>
 
 ```
 
-### Daten Speichern im processed Ordner
+## Daten Speichern im processed Ordner
 
 ```{r}
 
@@ -236,7 +238,7 @@ write.csv(x = Daten_gesammt,
 
 # Daten Visualisierung
 
-### Daten in ein Langes Format verwandeln
+## Daten in ein Langes Format verwandeln
 
 ```{r}
 
@@ -247,7 +249,7 @@ Daten_gesammt_long <- Daten_gesammt |>
     values_to = "Temperatur")
 ```
 
-### Verlauf der täglichen Aussen- und mittleren Probentemperatur
+## Verlauf der täglichen Aussen- und mittleren Probentemperatur
 
 ```{r}
 #| warning: false
@@ -289,6 +291,8 @@ Daten_gesammt_TempproTag_long <- Daten_gesammt_TempproTag |>
 
 ```{r}
 #| warning: false
+#| label: fig-Verlauf_aussenProbe2
+#| fig-cap: "Verlauf der täglichen Aussen- und mittleren Probentemperatur"
 
 ggplot(data = Daten_gesammt_TempproTag_long, mapping = aes(
   x= Datum,
@@ -311,16 +315,18 @@ ggplot(data = Daten_gesammt_TempproTag_long, mapping = aes(
 
 ```
 
-Die rote Linie steigt im Sommer auf über 30 °C und sinkt im Winter bis unter 0 °C. Das bestätigt, dass die Wetterdaten plausibel sind. Die türkise Linie steigt im Sommer ebenfalls etwas an, bleibt aber deutlich stabiler als die Aussentemperatur. Das spricht dafür, das die isolierten Versandboxen und die Kühlakkus einen kühlenden Effekt haben
+In der @fig-Verlauf_aussenProbe2 steigt die rote Linie im Sommer auf über 30 °C und sinkt im Winter bis unter 0 °C. Das bestätigt, dass die Wetterdaten plausibel sind. Die türkise Linie steigt im Sommer ebenfalls etwas an, bleibt aber deutlich stabiler als die Aussentemperatur. Das spricht dafür, das die isolierten Versandboxen und die Kühlakkus einen kühlenden Effekt haben
 
 Auffällig sind einzelne kurzfristige Spitzen und Einbrüche in beiden Messreihen. Diese können durch kurzfristige Wetterereignisse, Messbedingungen oder einzelne Ausreisser in den Daten verursacht sein. Insgesamt ist jedoch ein klarer Zusammenhang zwischen Aussen- und Probentemperatur erkennbar: Steigende Aussentemperaturen führen zeitversetzt zu höheren Probentemperaturen, während sinkende Aussentemperaturen ebenfalls eine Abkühlung der Probe bewirken.
 
 Die hohe tägliche Variabilität erschwert die Erkennung langfristiger Trends, jedoch zeigt der Zeitraum von 2024 bis 2026 keinen eindeutigen kontinuierlichen Anstieg oder Rückgang der Temperaturen. Der dominierende Einflussfaktor ist der saisonale Jahresverlauf mit wiederkehrenden Sommer- und Winterperioden.
 
-### Zusammenhang zwischen Aussen- und Probentemperatur
+## Zusammenhang zwischen Aussen- und Probentemperatur
 
 ```{r}
 #| warning: false
+#| label: fig-Zusammenhang_AussenProbe
+#| fig-cap: "Zusammenhang zwischen Aussen- und Probentemperatur"
 
 ggplot(data = Daten_gesammt, mapping = aes(
   x = Aussentemperatur,
@@ -334,12 +340,14 @@ ggplot(data = Daten_gesammt, mapping = aes(
   theme_stat()
 ```
 
-Auf diesem Plot erkennt man, dass je höher die Aussentemperatur ist, desto höher ist im Durchschnitt die Probentemperatur.\
+Auf der @fig-Zusammenhang_AussenProbe erkennt man, dass je höher die Aussentemperatur ist, desto höher ist im Durchschnitt die Probentemperatur.\
 Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut sind, Das bedeutet, das die Aussentemperatur nur einen kleinen Teil der Unterschiede erklärt. Denn es gibt noch weitere Faktoren, die man ebenfalls beachten muss wie zum Beispiel, die Anzahl der Kühlakkus, die Transportdauer oder die Art der Probe.
 
-### Monatliche Verteilung der Probentemperaturen
+## Monatliche Verteilung der Probentemperaturen
 
 ```{r}
+#| label: fig-MonatlicheVerteilung
+#| fig-cap: "Monatliche Verteilung der Probentemperaturen"
 
 Daten_gesammt_ohneNA <- Daten_gesammt|> 
   filter(!is.na(Probentemperatur),
@@ -358,14 +366,16 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
     y = "Probentemperatur (°C)",
     fill = "Jahr"
   ) +
-  theme_stat()
+  theme_stat() 
 ```
 
-Die grafische Auswertung zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.
+Die @fig-MonatlicheVerteilung zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.
 
-### Verteilung der Probentemperatur nach Labor
+## Verteilung der Probentemperatur nach Labor
 
 ```{r}
+#| label: fig-Probentemp
+#| fig-cap: "Verteilung der Probentemperatur nach Labor"
 
 ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
   x = as.factor(Labor),
@@ -378,11 +388,14 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
   theme_stat()
 ```
 
-Die Verteilung der Probentemperaturen unterscheidet sich zwischen den Laboren. Während Labor 1 und Labor 2 vergleichbare Medianwerte aufweisen, zeigt Labor 3 insgesamt höhere Eingangstemperaturen. Zudem weist Labor 1 eine größere Variabilität sowie mehrere hohe Ausreißer auf.
+Die @fig-Probentemp zeigt die Verteilung der Probentemperaturen zwischen den Laboren. Während Labor 1 und Labor 2 vergleichbare Medianwerte aufweisen, zeigt Labor 3 insgesamt höhere Eingangstemperaturen. Zudem weist Labor 1 eine größere Variabilität sowie mehrere hohe Ausreißer auf.
 
-### Verteilung der Probentemperatur nach Labor und Jahr
+## Verteilung der Probentemperatur nach Labor und Jahr
 
 ```{r}
+#| warning: false
+#| label: fig-Probentemp_LabJahr
+#| fig-cap: "Verteilung der Probentemperatur nach Labor und Jahr"
 
 ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
   x = as.factor(Labor),
@@ -393,11 +406,18 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
   labs(
     title = "Probentemperatur nach Labor und Jahr",
     x = "Labor",
-    y = " Probentemperatur (°C)",
-    fill = "Jahr") +
+    y = " Probentemperatur (°C)") +
   theme_stat()
 ```
 
-Die Boxplots zeigen die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt bleibt das Muster über die Jahre weitgehend konstant: Labor 3 verzeichnet die höchsten Temperaturen, Labor 1 die grösste Variabilität und Labor 2 liegt hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren. Die beobachteten Unterschiede können auf verschiedene Probenarten, Transportbedingungen oder unterschiedliche Abläufe in den Laboren zurückzuführen sein.
+Die @fig-Probentemp_LabJahr zeigt die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt bleibt das Muster über die Jahre weitgehend konstant: Labor 3 verzeichnet die höchsten Temperaturen, Labor 1 die grösste Variabilität und Labor 2 liegt hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren. Die beobachteten Unterschiede können auf verschiedene Probenarten, Transportbedingungen oder unterschiedliche Abläufe in den Laboren zurückzuführen sein.
 
 # Schlussfolgerung
+
+Die Auswertung zeigt, dass die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben hat, dieser Einfluss jedoch nicht allein ausschlaggebend ist. Mit steigender Aussentemperatur nehmen die Probentemperaturen ebenfalls zu, was sich sowohl im zeitlichen Verlauf als auch im Streudiagramm mit der positiven Regressionslinie erkennen lässt. Gleichzeitig ist die Streuung der Probentemperaturen bei gleichen Aussentemperaturen gross. Dies deutet darauf hin, dass neben der Witterung weitere Faktoren wie Transportdauer, Verpackung, Probenart oder organisatorische Abläufe die Temperatur bei der Ankunft beeinflussen.
+
+Die Zeitreihen zeigen zudem einen saisonalen Verlauf der Aussentemperaturen, während die Probentemperaturen deutlich geringeren Schwankungen unterliegen. Dies deutet darauf hin, dass die Probentemperaturen von weiteren Einflussfaktoren neben der Aussentemperatur geprägt werden.
+
+Zwischen den Laboren lassen sich ebenfalls Unterschiede erkennen. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf. Labor 1 zeigt die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, während Labor 2 hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren liegt. Diese Unterschiede bleiben über die betrachteten Jahre weitgehend konstant und könnten auf unterschiedliche Probenarten, Transportwege oder laborinterne Prozesse zurückzuführen sein.
+
+Insgesamt lässt sich festhalten, dass ein Zusammenhang zwischen Aussen- und Probentemperatur besteht, dieser jedoch relativ schwach ausgeprägt ist. Die Unterschiede zwischen den Laboren sowie die hohe Streuung der Messwerte sprechen dafür, dass neben der Aussentemperatur weitere Einflussgrössen eine wichtige Rolle für die Eingangstemperatur der Proben spielen.

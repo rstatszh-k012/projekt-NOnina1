@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nina">
 
-<title>index.qmd</title>
+<title>Abschlussprojekt Nonina1.qmd</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,15 +75,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#einleitung" id="toc-einleitung" class="nav-link active" data-scroll-target="#einleitung">Einleitung</a></li>
+  <li><a href="#analyseziele" id="toc-analyseziele" class="nav-link" data-scroll-target="#analyseziele">Analyseziele</a>
+  <ul class="collapse">
+  <li><a href="#fragestellungen" id="toc-fragestellungen" class="nav-link" data-scroll-target="#fragestellungen">Fragestellungen</a></li>
+  </ul></li>
+  <li><a href="#daten" id="toc-daten" class="nav-link" data-scroll-target="#daten">Daten</a>
+  <ul class="collapse">
+  <li><a href="#laden-der-daten" id="toc-laden-der-daten" class="nav-link" data-scroll-target="#laden-der-daten">Laden der Daten</a></li>
+  <li><a href="#herkunft-der-meteo-daten" id="toc-herkunft-der-meteo-daten" class="nav-link" data-scroll-target="#herkunft-der-meteo-daten">Herkunft der Meteo Daten:</a></li>
+  <li><a href="#herkunft-der-temperaturdaten" id="toc-herkunft-der-temperaturdaten" class="nav-link" data-scroll-target="#herkunft-der-temperaturdaten">Herkunft der Temperaturdaten</a></li>
+  </ul></li>
+  <li><a href="#daten-aufbereitung" id="toc-daten-aufbereitung" class="nav-link" data-scroll-target="#daten-aufbereitung">Daten Aufbereitung</a>
+  <ul class="collapse">
+  <li><a href="#datenbereinigung-für-das-jahr-2024" id="toc-datenbereinigung-für-das-jahr-2024" class="nav-link" data-scroll-target="#datenbereinigung-für-das-jahr-2024">Datenbereinigung für das Jahr 2024</a></li>
+  <li><a href="#datenbereinigung-für-das-jahr-2025" id="toc-datenbereinigung-für-das-jahr-2025" class="nav-link" data-scroll-target="#datenbereinigung-für-das-jahr-2025">Datenbereinigung für das Jahr 2025</a></li>
+  <li><a href="#datenbereinigung-für-das-jahr-2026" id="toc-datenbereinigung-für-das-jahr-2026" class="nav-link" data-scroll-target="#datenbereinigung-für-das-jahr-2026">Datenbereinigung für das Jahr 2026</a></li>
+  <li><a href="#daten-meteo-bereiningen-für-das-jahr-2024" id="toc-daten-meteo-bereiningen-für-das-jahr-2024" class="nav-link" data-scroll-target="#daten-meteo-bereiningen-für-das-jahr-2024">Daten Meteo bereiningen für das Jahr 2024</a></li>
+  <li><a href="#daten-meteo-bereiningen-für-das-jahr-2025" id="toc-daten-meteo-bereiningen-für-das-jahr-2025" class="nav-link" data-scroll-target="#daten-meteo-bereiningen-für-das-jahr-2025">Daten Meteo bereiningen für das Jahr 2025</a></li>
+  <li><a href="#daten-meteo-bereiningen-für-das-jahr-2026" id="toc-daten-meteo-bereiningen-für-das-jahr-2026" class="nav-link" data-scroll-target="#daten-meteo-bereiningen-für-das-jahr-2026">Daten Meteo bereiningen für das Jahr 2026</a></li>
+  <li><a href="#temperaturdaten-aller-jahre-zusammenfügen" id="toc-temperaturdaten-aller-jahre-zusammenfügen" class="nav-link" data-scroll-target="#temperaturdaten-aller-jahre-zusammenfügen">Temperaturdaten aller Jahre zusammenfügen</a></li>
+  <li><a href="#daten-meteo-zusammenfügen" id="toc-daten-meteo-zusammenfügen" class="nav-link" data-scroll-target="#daten-meteo-zusammenfügen">Daten Meteo zusammenfügen</a></li>
+  <li><a href="#meteo-temperaturtabelle-erstellen" id="toc-meteo-temperaturtabelle-erstellen" class="nav-link" data-scroll-target="#meteo-temperaturtabelle-erstellen">Meteo-Temperaturtabelle erstellen</a></li>
+  <li><a href="#daten-meteo-und-temperaturdaten-zusammenfügen" id="toc-daten-meteo-und-temperaturdaten-zusammenfügen" class="nav-link" data-scroll-target="#daten-meteo-und-temperaturdaten-zusammenfügen">Daten Meteo und Temperaturdaten zusammenfügen</a></li>
+  <li><a href="#daten-speichern-im-processed-ordner" id="toc-daten-speichern-im-processed-ordner" class="nav-link" data-scroll-target="#daten-speichern-im-processed-ordner">Daten Speichern im processed Ordner</a></li>
+  </ul></li>
+  <li><a href="#daten-visualisierung" id="toc-daten-visualisierung" class="nav-link" data-scroll-target="#daten-visualisierung">Daten Visualisierung</a>
+  <ul class="collapse">
+  <li><a href="#daten-in-ein-langes-format-verwandeln" id="toc-daten-in-ein-langes-format-verwandeln" class="nav-link" data-scroll-target="#daten-in-ein-langes-format-verwandeln">Daten in ein Langes Format verwandeln</a></li>
+  <li><a href="#verlauf-der-täglichen-aussen--und-mittleren-probentemperatur" id="toc-verlauf-der-täglichen-aussen--und-mittleren-probentemperatur" class="nav-link" data-scroll-target="#verlauf-der-täglichen-aussen--und-mittleren-probentemperatur">Verlauf der täglichen Aussen- und mittleren Probentemperatur</a></li>
+  <li><a href="#zusammenhang-zwischen-aussen--und-probentemperatur" id="toc-zusammenhang-zwischen-aussen--und-probentemperatur" class="nav-link" data-scroll-target="#zusammenhang-zwischen-aussen--und-probentemperatur">Zusammenhang zwischen Aussen- und Probentemperatur</a></li>
+  <li><a href="#monatliche-verteilung-der-probentemperaturen" id="toc-monatliche-verteilung-der-probentemperaturen" class="nav-link" data-scroll-target="#monatliche-verteilung-der-probentemperaturen">Monatliche Verteilung der Probentemperaturen</a></li>
+  <li><a href="#verteilung-der-probentemperatur-nach-labor" id="toc-verteilung-der-probentemperatur-nach-labor" class="nav-link" data-scroll-target="#verteilung-der-probentemperatur-nach-labor">Verteilung der Probentemperatur nach Labor</a></li>
+  <li><a href="#verteilung-der-probentemperatur-nach-labor-und-jahr" id="toc-verteilung-der-probentemperatur-nach-labor-und-jahr" class="nav-link" data-scroll-target="#verteilung-der-probentemperatur-nach-labor-und-jahr">Verteilung der Probentemperatur nach Labor und Jahr</a></li>
+  </ul></li>
+  <li><a href="#schlussfolgerung" id="toc-schlussfolgerung" class="nav-link" data-scroll-target="#schlussfolgerung">Schlussfolgerung</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">index.qmd</h1>
+<h1 class="title">Abschlussprojekt Nonina1.qmd</h1>
 </div>
 
 
@@ -97,6 +139,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">31. Juli 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -118,10 +166,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Einleitung</h1>
 <p>Dieses Projekt entsteht im Rahmen vom <strong>rstatsZH Kurs 012.</strong></p>
 <p>Im Labor wird beim Eingang von Proben routinemässig die Eingangstemperatur erfasst. Die Proben werden in der Regel in isolierten Versandboxen mit Tiefkühlelementen transportiert, um während des Versands geeignete Temperaturbedingungen sicherzustellen. Im Rahmen dieses Projekts werden die erfassten Temperaturdaten ausgewertet und analysiert.</p>
-<section id="daten" class="level2">
-<h2 class="anchored" data-anchor-id="daten">Daten</h2>
-<section id="laden-der-daten" class="level3">
-<h3 class="anchored" data-anchor-id="laden-der-daten">Laden der Daten</h3>
+</section>
+<section id="analyseziele" class="level1">
+<h1>Analyseziele</h1>
+<section id="fragestellungen" class="level2">
+<h2 class="anchored" data-anchor-id="fragestellungen">Fragestellungen</h2>
+<ul>
+<li><p>Hat die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben bei der Ankunft im Labor?</p></li>
+<li><p>Lassen sich Unterschiede oder Trends in den Eingangstemperaturen zwischen den verschiedenen Laboren erkennen?</p></li>
+</ul>
+</section>
+</section>
+<section id="daten" class="level1">
+<h1>Daten</h1>
+<section id="laden-der-daten" class="level2">
+<h2 class="anchored" data-anchor-id="laden-der-daten">Laden der Daten</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Temp2024 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2024.csv"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Temp2025 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2025.csv"</span>))</span>
@@ -133,31 +192,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Meteo2026 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2026.csv"</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="herkunft-der-meteo-daten" class="level3">
-<h3 class="anchored" data-anchor-id="herkunft-der-meteo-daten">Herkunft der Meteo Daten:</h3>
+<section id="herkunft-der-meteo-daten" class="level2">
+<h2 class="anchored" data-anchor-id="herkunft-der-meteo-daten">Herkunft der Meteo Daten:</h2>
 <p><a href="https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte" class="uri">https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte</a></p>
 </section>
-<section id="herkunft-der-temperaturdaten" class="level3">
-<h3 class="anchored" data-anchor-id="herkunft-der-temperaturdaten">Herkunft der Temperaturdaten</h3>
+<section id="herkunft-der-temperaturdaten" class="level2">
+<h2 class="anchored" data-anchor-id="herkunft-der-temperaturdaten">Herkunft der Temperaturdaten</h2>
 <p>Die Temperaturdaten wurden aus dem Datenbestand des Kantonalen Labors Zürich exportiert. Vor der Auswertung wurden die Daten entsprechend aufbereitet und anonymisiert. Der Datensatz enthält ausschliesslich die gemessenen Eingangstemperaturen, das Eingangsdatum, die Probennummer sowie das Labor, welches die jeweiligen Proben erhalten hat. Die Laborangaben wurden dabei durch numerische Kennzeichnungen anonymisiert.</p>
-</section>
-</section>
-<section id="analyseziele" class="level2">
-<h2 class="anchored" data-anchor-id="analyseziele">Analyseziele</h2>
-<section id="fragestellungen" class="level3">
-<h3 class="anchored" data-anchor-id="fragestellungen">Fragestellungen</h3>
-<ul>
-<li><p>Hat die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben bei der Ankunft im Labor?</p></li>
-<li><p>Lassen sich Unterschiede oder Trends in den Eingangstemperaturen zwischen den verschiedenen Laboren erkennen?<br>
-</p></li>
-</ul>
-</section>
 </section>
 </section>
 <section id="daten-aufbereitung" class="level1">
 <h1>Daten Aufbereitung</h1>
-<section id="datenbereinigun-für-das-jahr-2024" class="level3">
-<h3 class="anchored" data-anchor-id="datenbereinigun-für-das-jahr-2024">Datenbereinigun für das Jahr 2024</h3>
+<section id="datenbereinigung-für-das-jahr-2024" class="level2">
+<h2 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2024">Datenbereinigung für das Jahr 2024</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Temp2024_kor <span class="ot">&lt;-</span> Temp2024 <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Probe.Nr,</span>
@@ -172,8 +219,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Datum, <span class="at">.after =</span> Liefermonat)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="datenbereinigung-für-das-jahr-2025" class="level3">
-<h3 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2025">Datenbereinigung für das Jahr 2025</h3>
+<section id="datenbereinigung-für-das-jahr-2025" class="level2">
+<h2 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2025">Datenbereinigung für das Jahr 2025</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Temp_2025 <span class="ot">&lt;-</span> Temp2025 <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Pro2.Nr,</span>
@@ -198,8 +245,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Monat)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="datenbereinigung-für-das-jahr-2026" class="level3">
-<h3 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2026">Datenbereinigung für das Jahr 2026</h3>
+<section id="datenbereinigung-für-das-jahr-2026" class="level2">
+<h2 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2026">Datenbereinigung für das Jahr 2026</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Temp2026_kor <span class="ot">&lt;-</span> Temp2026 <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Pro2nummer) <span class="sc">|&gt;</span> </span>
@@ -211,44 +258,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Datum, <span class="at">.after =</span> Liefermonat)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="daten-meteo-bereiningen-für-das-jahr-2024" class="level3">
-<h3 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2024">Daten Meteo bereiningen für das Jahr 2024</h3>
+<section id="daten-meteo-bereiningen-für-das-jahr-2024" class="level2">
+<h2 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2024">Daten Meteo bereiningen für das Jahr 2024</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Meteo2024_kor <span class="ot">&lt;-</span> Meteo2024 <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Standort <span class="sc">==</span> <span class="st">"Zch_Heubeeribüel"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         Parameter <span class="sc">==</span> <span class="st">"T_max_h1"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="daten-meteo-bereiningen-für-das-jahr-2025" class="level3">
-<h3 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2025">Daten Meteo bereiningen für das Jahr 2025</h3>
+<section id="daten-meteo-bereiningen-für-das-jahr-2025" class="level2">
+<h2 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2025">Daten Meteo bereiningen für das Jahr 2025</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Meteo2025_kor <span class="ot">&lt;-</span> Meteo2025 <span class="sc">|&gt;</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Standort <span class="sc">==</span> <span class="st">"Zch_Heubeeribüel"</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         Parameter <span class="sc">==</span> <span class="st">"T_max_h1"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="daten-meteo-bereiningen-für-das-jahr-2026" class="level3">
-<h3 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2026">Daten Meteo bereiningen für das Jahr 2026</h3>
+<section id="daten-meteo-bereiningen-für-das-jahr-2026" class="level2">
+<h2 class="anchored" data-anchor-id="daten-meteo-bereiningen-für-das-jahr-2026">Daten Meteo bereiningen für das Jahr 2026</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Meteo2026_kor <span class="ot">&lt;-</span> Meteo2026 <span class="sc">|&gt;</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Standort <span class="sc">==</span> <span class="st">"Zch_Heubeeribüel"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         Parameter <span class="sc">==</span> <span class="st">"T_max_h1"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="temperaturdaten-aller-jahre-zusammenfügen" class="level3">
-<h3 class="anchored" data-anchor-id="temperaturdaten-aller-jahre-zusammenfügen">Temperaturdaten aller Jahre zusammenfügen</h3>
+<section id="temperaturdaten-aller-jahre-zusammenfügen" class="level2">
+<h2 class="anchored" data-anchor-id="temperaturdaten-aller-jahre-zusammenfügen">Temperaturdaten aller Jahre zusammenfügen</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Temp2024bis2026 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(Temp2024_kor, Temp2025_kor, Temp2026_kor)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="daten-meteo-zusammenfügen" class="level3">
-<h3 class="anchored" data-anchor-id="daten-meteo-zusammenfügen">Daten Meteo zusammenfügen</h3>
+<section id="daten-meteo-zusammenfügen" class="level2">
+<h2 class="anchored" data-anchor-id="daten-meteo-zusammenfügen">Daten Meteo zusammenfügen</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Meteo2024bis2026 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(Meteo2024_kor, Meteo2025_kor, Meteo2026_kor)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="meteo-temperaturtabelle-erstellen" class="level3">
-<h3 class="anchored" data-anchor-id="meteo-temperaturtabelle-erstellen">Meteo-Temperaturtabelle erstellen</h3>
+<section id="meteo-temperaturtabelle-erstellen" class="level2">
+<h2 class="anchored" data-anchor-id="meteo-temperaturtabelle-erstellen">Meteo-Temperaturtabelle erstellen</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Meteo2024bis2026_Saison <span class="ot">&lt;-</span> Meteo2024bis2026 <span class="sc">|&gt;</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -346,8 +393,8 @@ Tabelle&nbsp;1: Jahres- und saisonale Temperaturstatistik 2024-2026
 </div>
 <p>Die <a href="#tbl-Temperaturstatistik" class="quarto-xref">Tabelle&nbsp;1</a> zeigt, dass die mittlere Jahrestemperatur im Zeitraum 2024–2026 mit etwa 14,1–14,3 °C nahezu konstant blieb. Die höchste Maximaltemperatur wurde 2026 mit 35,5 °C gemessen, während die niedrigste Minimaltemperatur ebenfalls 2026 mit -5,3 °C auftrat. Die Sommer waren durchgehend die wärmste Jahreszeit, wobei 2026 mit durchschnittlich 26,4 °C den höchsten Sommermittelwert erreichte</p>
 </section>
-<section id="daten-meteo-und-temperaturdaten-zusammenfügen" class="level3">
-<h3 class="anchored" data-anchor-id="daten-meteo-und-temperaturdaten-zusammenfügen">Daten Meteo und Temperaturdaten zusammenfügen</h3>
+<section id="daten-meteo-und-temperaturdaten-zusammenfügen" class="level2">
+<h2 class="anchored" data-anchor-id="daten-meteo-und-temperaturdaten-zusammenfügen">Daten Meteo und Temperaturdaten zusammenfügen</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt <span class="ot">&lt;-</span> Temp2024bis2026 <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(Meteo2024bis2026_Saison, <span class="at">by =</span> <span class="st">"Datum"</span>) <span class="sc">|&gt;</span> </span>
@@ -358,8 +405,8 @@ Tabelle&nbsp;1: Jahres- und saisonale Temperaturstatistik 2024-2026
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Parameter, <span class="sc">-</span>Intervall, <span class="sc">-</span>Standort, <span class="sc">-</span>Status, <span class="sc">-</span>Einheit, <span class="sc">-</span>Jahr.y, <span class="sc">-</span>Monat_in_Zahl)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="daten-speichern-im-processed-ordner" class="level3">
-<h3 class="anchored" data-anchor-id="daten-speichern-im-processed-ordner">Daten Speichern im processed Ordner</h3>
+<section id="daten-speichern-im-processed-ordner" class="level2">
+<h2 class="anchored" data-anchor-id="daten-speichern-im-processed-ordner">Daten Speichern im processed Ordner</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> Daten_gesammt,</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>          here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/processed/Daten_gesammt.csv"</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -368,8 +415,8 @@ Tabelle&nbsp;1: Jahres- und saisonale Temperaturstatistik 2024-2026
 </section>
 <section id="daten-visualisierung" class="level1">
 <h1>Daten Visualisierung</h1>
-<section id="daten-in-ein-langes-format-verwandeln" class="level3">
-<h3 class="anchored" data-anchor-id="daten-in-ein-langes-format-verwandeln">Daten in ein Langes Format verwandeln</h3>
+<section id="daten-in-ein-langes-format-verwandeln" class="level2">
+<h2 class="anchored" data-anchor-id="daten-in-ein-langes-format-verwandeln">Daten in ein Langes Format verwandeln</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt_long <span class="ot">&lt;-</span> Daten_gesammt <span class="sc">|&gt;</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
@@ -378,8 +425,8 @@ Tabelle&nbsp;1: Jahres- und saisonale Temperaturstatistik 2024-2026
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Temperatur"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="verlauf-der-täglichen-aussen--und-mittleren-probentemperatur" class="level3">
-<h3 class="anchored" data-anchor-id="verlauf-der-täglichen-aussen--und-mittleren-probentemperatur">Verlauf der täglichen Aussen- und mittleren Probentemperatur</h3>
+<section id="verlauf-der-täglichen-aussen--und-mittleren-probentemperatur" class="level2">
+<h2 class="anchored" data-anchor-id="verlauf-der-täglichen-aussen--und-mittleren-probentemperatur">Verlauf der täglichen Aussen- und mittleren Probentemperatur</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt_long, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span> Datum,</span>
@@ -438,19 +485,24 @@ Abbildung&nbsp;1: Verlauf der täglichen Aussen- und mittleren Probentemperatur
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-Verlauf_aussenProbe2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Verlauf_aussenProbe2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="projekt-Nonina1_files/figure-html/fig-Verlauf_aussenProbe2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Verlauf_aussenProbe2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;2: Verlauf der täglichen Aussen- und mittleren Probentemperatur
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Die rote Linie steigt im Sommer auf über 30 °C und sinkt im Winter bis unter 0 °C. Das bestätigt, dass die Wetterdaten plausibel sind. Die türkise Linie steigt im Sommer ebenfalls etwas an, bleibt aber deutlich stabiler als die Aussentemperatur. Das spricht dafür, das die isolierten Versandboxen und die Kühlakkus einen kühlenden Effekt haben</p>
+<p>In der <a href="#fig-Verlauf_aussenProbe2" class="quarto-xref">Abbildung&nbsp;2</a> steigt die rote Linie im Sommer auf über 30 °C und sinkt im Winter bis unter 0 °C. Das bestätigt, dass die Wetterdaten plausibel sind. Die türkise Linie steigt im Sommer ebenfalls etwas an, bleibt aber deutlich stabiler als die Aussentemperatur. Das spricht dafür, das die isolierten Versandboxen und die Kühlakkus einen kühlenden Effekt haben</p>
 <p>Auffällig sind einzelne kurzfristige Spitzen und Einbrüche in beiden Messreihen. Diese können durch kurzfristige Wetterereignisse, Messbedingungen oder einzelne Ausreisser in den Daten verursacht sein. Insgesamt ist jedoch ein klarer Zusammenhang zwischen Aussen- und Probentemperatur erkennbar: Steigende Aussentemperaturen führen zeitversetzt zu höheren Probentemperaturen, während sinkende Aussentemperaturen ebenfalls eine Abkühlung der Probe bewirken.</p>
 <p>Die hohe tägliche Variabilität erschwert die Erkennung langfristiger Trends, jedoch zeigt der Zeitraum von 2024 bis 2026 keinen eindeutigen kontinuierlichen Anstieg oder Rückgang der Temperaturen. Der dominierende Einflussfaktor ist der saisonale Jahresverlauf mit wiederkehrenden Sommer- und Winterperioden.</p>
 </section>
-<section id="zusammenhang-zwischen-aussen--und-probentemperatur" class="level3">
-<h3 class="anchored" data-anchor-id="zusammenhang-zwischen-aussen--und-probentemperatur">Zusammenhang zwischen Aussen- und Probentemperatur</h3>
+<section id="zusammenhang-zwischen-aussen--und-probentemperatur" class="level2">
+<h2 class="anchored" data-anchor-id="zusammenhang-zwischen-aussen--und-probentemperatur">Zusammenhang zwischen Aussen- und Probentemperatur</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> Aussentemperatur,</span>
@@ -463,18 +515,23 @@ Abbildung&nbsp;1: Verlauf der täglichen Aussen- und mittleren Probentemperatur
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probentemperatur (°C)"</span>) <span class="sc">+</span></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-Zusammenhang_AussenProbe" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Zusammenhang_AussenProbe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="projekt-Nonina1_files/figure-html/fig-Zusammenhang_AussenProbe-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Zusammenhang_AussenProbe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;3: Zusammenhang zwischen Aussen- und Probentemperatur
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Auf diesem Plot erkennt man, dass je höher die Aussentemperatur ist, desto höher ist im Durchschnitt die Probentemperatur.<br>
+<p>Auf der <a href="#fig-Zusammenhang_AussenProbe" class="quarto-xref">Abbildung&nbsp;3</a> erkennt man, dass je höher die Aussentemperatur ist, desto höher ist im Durchschnitt die Probentemperatur.<br>
 Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut sind, Das bedeutet, das die Aussentemperatur nur einen kleinen Teil der Unterschiede erklärt. Denn es gibt noch weitere Faktoren, die man ebenfalls beachten muss wie zum Beispiel, die Anzahl der Kühlakkus, die Transportdauer oder die Art der Probe.</p>
 </section>
-<section id="monatliche-verteilung-der-probentemperaturen" class="level3">
-<h3 class="anchored" data-anchor-id="monatliche-verteilung-der-probentemperaturen">Monatliche Verteilung der Probentemperaturen</h3>
+<section id="monatliche-verteilung-der-probentemperaturen" class="level2">
+<h2 class="anchored" data-anchor-id="monatliche-verteilung-der-probentemperaturen">Monatliche Verteilung der Probentemperaturen</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Daten_gesammt_ohneNA <span class="ot">&lt;-</span> Daten_gesammt<span class="sc">|&gt;</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Probentemperatur),</span>
@@ -493,19 +550,24 @@ Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probentemperatur (°C)"</span>,</span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Jahr"</span></span>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>() </span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-MonatlicheVerteilung" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-MonatlicheVerteilung-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="projekt-Nonina1_files/figure-html/fig-MonatlicheVerteilung-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MonatlicheVerteilung-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;4: Monatliche Verteilung der Probentemperaturen
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Die grafische Auswertung zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.</p>
+<p>Die <a href="#fig-MonatlicheVerteilung" class="quarto-xref">Abbildung&nbsp;4</a> zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.</p>
 </section>
-<section id="verteilung-der-probentemperatur-nach-labor" class="level3">
-<h3 class="anchored" data-anchor-id="verteilung-der-probentemperatur-nach-labor">Verteilung der Probentemperatur nach Labor</h3>
+<section id="verteilung-der-probentemperatur-nach-labor" class="level2">
+<h2 class="anchored" data-anchor-id="verteilung-der-probentemperatur-nach-labor">Verteilung der Probentemperatur nach Labor</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt_ohneNA, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">as.factor</span>(Labor),</span>
@@ -517,17 +579,22 @@ Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probentemperatur (°C)"</span>) <span class="sc">+</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-Probentemp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Probentemp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="projekt-Nonina1_files/figure-html/fig-Probentemp-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Probentemp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;5: Verteilung der Probentemperatur nach Labor
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Die Verteilung der Probentemperaturen unterscheidet sich zwischen den Laboren. Während Labor 1 und Labor 2 vergleichbare Medianwerte aufweisen, zeigt Labor 3 insgesamt höhere Eingangstemperaturen. Zudem weist Labor 1 eine größere Variabilität sowie mehrere hohe Ausreißer auf.</p>
+<p>Die <a href="#fig-Probentemp" class="quarto-xref">Abbildung&nbsp;5</a> zeigt die Verteilung der Probentemperaturen zwischen den Laboren. Während Labor 1 und Labor 2 vergleichbare Medianwerte aufweisen, zeigt Labor 3 insgesamt höhere Eingangstemperaturen. Zudem weist Labor 1 eine größere Variabilität sowie mehrere hohe Ausreißer auf.</p>
 </section>
-<section id="verteilung-der-probentemperatur-nach-labor-und-jahr" class="level3">
-<h3 class="anchored" data-anchor-id="verteilung-der-probentemperatur-nach-labor-und-jahr">Verteilung der Probentemperatur nach Labor und Jahr</h3>
+<section id="verteilung-der-probentemperatur-nach-labor-und-jahr" class="level2">
+<h2 class="anchored" data-anchor-id="verteilung-der-probentemperatur-nach-labor-und-jahr">Verteilung der Probentemperatur nach Labor und Jahr</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Daten_gesammt_ohneNA, <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">as.factor</span>(Labor),</span>
@@ -538,26 +605,30 @@ Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Probentemperatur nach Labor und Jahr"</span>,</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Labor"</span>,</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">" Probentemperatur (°C)"</span>,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Jahr"</span>) <span class="sc">+</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Ignoring unknown labels:
-• fill : "Jahr"</code></pre>
-</div>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">" Probentemperatur (°C)"</span>) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_stat</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="projekt-Nonina1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-Probentemp_LabJahr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Probentemp_LabJahr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="projekt-Nonina1_files/figure-html/fig-Probentemp_LabJahr-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Probentemp_LabJahr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;6: Verteilung der Probentemperatur nach Labor und Jahr
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Die Boxplots zeigen die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt bleibt das Muster über die Jahre weitgehend konstant: Labor 3 verzeichnet die höchsten Temperaturen, Labor 1 die grösste Variabilität und Labor 2 liegt hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren. Die beobachteten Unterschiede können auf verschiedene Probenarten, Transportbedingungen oder unterschiedliche Abläufe in den Laboren zurückzuführen sein.</p>
+<p>Die <a href="#fig-Probentemp_LabJahr" class="quarto-xref">Abbildung&nbsp;6</a> zeigt die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt bleibt das Muster über die Jahre weitgehend konstant: Labor 3 verzeichnet die höchsten Temperaturen, Labor 1 die grösste Variabilität und Labor 2 liegt hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren. Die beobachteten Unterschiede können auf verschiedene Probenarten, Transportbedingungen oder unterschiedliche Abläufe in den Laboren zurückzuführen sein.</p>
 </section>
 </section>
 <section id="schlussfolgerung" class="level1">
 <h1>Schlussfolgerung</h1>
+<p>Die Auswertung zeigt, dass die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben hat, dieser Einfluss jedoch nicht allein ausschlaggebend ist. Mit steigender Aussentemperatur nehmen die Probentemperaturen ebenfalls zu, was sich sowohl im zeitlichen Verlauf als auch im Streudiagramm mit der positiven Regressionslinie erkennen lässt. Gleichzeitig ist die Streuung der Probentemperaturen bei gleichen Aussentemperaturen gross. Dies deutet darauf hin, dass neben der Witterung weitere Faktoren wie Transportdauer, Verpackung, Probenart oder organisatorische Abläufe die Temperatur bei der Ankunft beeinflussen.</p>
+<p>Die Zeitreihen zeigen zudem einen saisonalen Verlauf der Aussentemperaturen, während die Probentemperaturen deutlich geringeren Schwankungen unterliegen. Dies deutet darauf hin, dass die Probentemperaturen von weiteren Einflussfaktoren neben der Aussentemperatur geprägt werden.</p>
+<p>Zwischen den Laboren lassen sich ebenfalls Unterschiede erkennen. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf. Labor 1 zeigt die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, während Labor 2 hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren liegt. Diese Unterschiede bleiben über die betrachteten Jahre weitgehend konstant und könnten auf unterschiedliche Probenarten, Transportwege oder laborinterne Prozesse zurückzuführen sein.</p>
+<p>Insgesamt lässt sich festhalten, dass ein Zusammenhang zwischen Aussen- und Probentemperatur besteht, dieser jedoch relativ schwach ausgeprägt ist. Die Unterschiede zwischen den Laboren sowie die hohe Streuung der Messwerte sprechen dafür, dass neben der Aussentemperatur weitere Einflussgrössen eine wichtige Rolle für die Eingangstemperatur der Proben spielen.</p>
 </section>
 
 </main>
