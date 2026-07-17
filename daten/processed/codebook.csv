@@ -1,1 +1,23 @@
-﻿variable_name;beschreibung
+﻿variable_name;Vektor;beschreibung
+Datum;chr/ Date;Datum
+Probe.Nr;int;probennummer
+Temperatur.Fleisch;int;Probentemperatur
+Jahr;int;Jahr
+Probennummer;int;Probennummer
+Temperatur;num;Temepratur der Probe
+Liefermonat;num;Liefermonat in Zahl
+Labor;num;Labornummer
+Pro2.NR;int;Probennummer
+ProbenEingangsdatum;chr;Datum
+Pro2nummer;chr;Probennummer
+Standort;chr;Strasse des Standorts
+Parameter;chr;T, RainDur, et.
+Intervall;chr;d1
+Einheit;chr;°C
+Wert;num;Zahl
+Status;chr;bereinigt
+Probentemperatur;int;Probentemperatur
+Aussentemperatur;num;Aussentemperatur
+Saison;chr;Jahreszeit
+Temperaturtyp;chr;Aussentemperatur oder Probentemperatur
+Probentemperatur_mean;num;Mittelwert Probentemperatur pro Tag
