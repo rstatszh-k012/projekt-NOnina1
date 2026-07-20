@@ -80,7 +80,6 @@ Temp2024_kor <- Temp2024 |>
   relocate(Liefermonat, .after = Temperatur) |> 
   relocate(Datum, .after = Liefermonat)
           
-
 ```
 
 ## Datenbereinigung für das Jahr 2025
@@ -351,11 +350,16 @@ Dies erkennt man daran, dass die Punkte sehr breit umd die blaue Linie verstreut
 
 Daten_gesammt_ohneNA <- Daten_gesammt|> 
   filter(!is.na(Probentemperatur),
-         !is.na(Liefermonat))
+         !is.na(Liefermonat)) |> 
+  mutate(
+    Liefermonat = factor(
+      Liefermonat,
+      levels = 1:12,
+      labels = c("Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember")))
 
 
 ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
-  x = factor(Liefermonat),
+  x = Liefermonat,
   y = Probentemperatur,
   fill = factor(Jahr))) +
   geom_boxplot() +
@@ -366,7 +370,9 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
     y = "Probentemperatur (°C)",
     fill = "Jahr"
   ) +
-  theme_stat() 
+  theme_stat() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 Die @fig-MonatlicheVerteilung zeigt eine Tendenz zu niedrigeren Probentemperaturen in den Jahren 2025 und 2026 im Vergleich zu 2024. Diese Entwicklung ist plausibel, da Anfang 2025 Massnahmen zur Verbesserung der Kühlung und des Probentransports eingeführt wurden. Die beobachtete Tendenz steht somit im Einklang mit der erwarteten Wirkung dieser Massnahmen.
@@ -388,7 +394,7 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
   theme_stat()
 ```
 
-Die @fig-Probentemp zeigt die Verteilung der Probentemperaturen zwischen den Laboren. Während Labor 1 und Labor 2 vergleichbare Medianwerte aufweisen, zeigt Labor 3 insgesamt höhere Eingangstemperaturen. Zudem weist Labor 1 eine größere Variabilität sowie mehrere hohe Ausreißer auf.
+Die @fig-Probentemp zeigt die Verteilung der Probentemperaturen zwischen den Laboren. Während Labor 1 und Labor 2 vergleichbare Medianwerte aufweisen, zeigt Labor 3 insgesamt höhere Eingangstemperaturen. Zudem weist Labor 1 eine grössere Variabilität sowie mehrere hohe Ausreisser auf.
 
 ## Verteilung der Probentemperatur nach Labor und Jahr
 
@@ -410,14 +416,37 @@ ggplot(data = Daten_gesammt_ohneNA, mapping = aes(
   theme_stat()
 ```
 
-Die @fig-Probentemp_LabJahr zeigt die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt bleibt das Muster über die Jahre weitgehend konstant: Labor 3 verzeichnet die höchsten Temperaturen, Labor 1 die grösste Variabilität und Labor 2 liegt hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren. Die beobachteten Unterschiede können auf verschiedene Probenarten, Transportbedingungen oder unterschiedliche Abläufe in den Laboren zurückzuführen sein.
+Die @fig-Probentemp_LabJahr zeigt die Verteilung der Probentemperaturen in den drei Laboren über die Jahre 2024 bis 2026. Im Jahr 2024 liegen nur Daten für Labor 1 vor. Ab 2025 sind alle drei Labore vertreten, wodurch ein direkter Vergleich möglich wird. Dabei weist Labor 3 im Jahr 2025 die höchsten Probentemperaturen auf, während die Medianwerte von Labor 1 und 2 tiefer liegen. Labor 1 zeigt zudem die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, insbesondere im Jahr 2025. Insgesamt kann zum jetzigen Zeitpunkt noch keine klare Aussage getroffen werden. Dazu müssten zunächst weitere Daten gesammelt werden.
 
 # Schlussfolgerung
 
-Die Auswertung zeigt, dass die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben hat, dieser Einfluss jedoch nicht allein ausschlaggebend ist. Mit steigender Aussentemperatur nehmen die Probentemperaturen ebenfalls zu, was sich sowohl im zeitlichen Verlauf als auch im Streudiagramm mit der positiven Regressionslinie erkennen lässt. Gleichzeitig ist die Streuung der Probentemperaturen bei gleichen Aussentemperaturen gross. Dies deutet darauf hin, dass neben der Witterung weitere Faktoren wie Transportdauer, Verpackung, Probenart oder organisatorische Abläufe die Temperatur bei der Ankunft beeinflussen.
+Die Auswertung zeigt, dass die Aussentemperatur einen Einfluss auf die Eingangstemperatur der Proben hat, dieser Einfluss jedoch nicht allein ausschlaggebend ist. Mit steigender Aussentemperatur nehmen die Probentemperaturen zu, was sich sowohl im zeitlichen Verlauf als auch im Streudiagramm mit der positiven Regressionslinie erkennen lässt. Gleichzeitig ist die Streuung der Probentemperaturen bei gleichen Aussentemperaturen gross. Dies deutet darauf hin, dass neben der Witterung weitere Faktoren wie Transportdauer, Verpackung, Probenart oder organisatorische Abläufe die Temperatur bei der Ankunft beeinflussen.
 
-Die Zeitreihen zeigen zudem einen saisonalen Verlauf der Aussentemperaturen, während die Probentemperaturen deutlich geringeren Schwankungen unterliegen. Dies deutet darauf hin, dass die Probentemperaturen von weiteren Einflussfaktoren neben der Aussentemperatur geprägt werden.
-
-Zwischen den Laboren lassen sich ebenfalls Unterschiede erkennen. Dabei weist Labor 3 in beiden Jahren die höchsten Probentemperaturen auf. Labor 1 zeigt die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, während Labor 2 hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren liegt. Diese Unterschiede bleiben über die betrachteten Jahre weitgehend konstant und könnten auf unterschiedliche Probenarten, Transportwege oder laborinterne Prozesse zurückzuführen sein.
+Zwischen den Laboren lassen sich ebenfalls Unterschiede erkennen. Dabei weist Labor 3 im Jahr 2025 die höchsten Probentemperaturen auf. Labor 1 zeigt die grösste Streuung der Messwerte sowie mehrere hohe Ausreisser, während Labor 2 hinsichtlich der Temperaturverteilung zwischen den beiden anderen Laboren liegt. Diese Unterschiede bleiben über die betrachteten Jahre weitgehend konstant und könnten auf unterschiedliche Probenarten, Transportwege oder laborinterne Prozesse zurückzuführen sein.
 
 Insgesamt lässt sich festhalten, dass ein Zusammenhang zwischen Aussen- und Probentemperatur besteht, dieser jedoch relativ schwach ausgeprägt ist. Die Unterschiede zwischen den Laboren sowie die hohe Streuung der Messwerte sprechen dafür, dass neben der Aussentemperatur weitere Einflussgrössen eine wichtige Rolle für die Eingangstemperatur der Proben spielen.
+
+# Bonus
+
+Theoretisch gibt es eine „Temperaturgrenze” von 8 °C. Diese wurde jedoch bisher noch nicht umgesetzt.\
+Daher könnten wir noch schauen, wieviele Proben über diesen 8°C waren.
+
+```{r}
+
+
+Ueber8 <- Daten_gesammt_ohneNA |>
+  group_by(Jahr) |>
+  summarise(
+    Anzahl_ueber_8 = sum(Probentemperatur > 8),
+    Gesamt = n(),
+    Anteil = round(100 * Anzahl_ueber_8 / Gesamt, 1)
+  )
+
+
+kable(Ueber8,
+      digits = 1,
+      caption = "Anzahl Proben pro Jahr, welche über 8°C waren")
+  
+```
+
+Eine verlässliche Analyse der Daten ist im gegenwärtigen Zustand nur begrenzt möglich, da für das Jahr 2024 lediglich eine geringe Anzahl an Temperaturmessungen zur Verfügung steht. Derzeit ist nur ein vollständiges Jahr mit lückenlosen Temperaturdaten verfügbar, was die Aussagekraft der Ergebnisse einschränkt.
