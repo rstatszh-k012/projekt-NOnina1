@@ -40,15 +40,18 @@ Im Labor wird beim Eingang von Proben routinemässig die Eingangstemperatur erfa
 ## Laden der Daten
 
 ```{r}
+#| echo: true
+#| message: false
 
-Temp2024 <- read.csv2(here::here("daten/raw/TemperaturProbenankunft2024.csv"))
-Temp2025 <- read.csv2(here::here("daten/raw/TemperaturProbenankunft2025.csv"))
-Temp2026 <- read.csv2(here::here("daten/raw/TemperaturProbenankunft2026.csv"))
-Datum2025 <- read.csv2(here::here("daten/raw/EingangsdatumProben2025.csv"))
 
-Meteo2024 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2024.csv"))
-Meteo2025 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2025.csv"))
-Meteo2026 <- read.csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
+Temp2024 <- read_csv2(here::here("daten/raw/TemperaturProbenankunft2024.csv"))
+Temp2025 <- read_csv2(here::here("daten/raw/TemperaturProbenankunft2025.csv"))
+Temp2026 <- read_csv2(here::here("daten/raw/TemperaturProbenankunft2026.csv"))
+Datum2025 <- read_csv2(here::here("daten/raw/EingangsdatumProben2025.csv"))
+
+Meteo2024 <- read_csv(here::here("daten/raw/ugz_ogd_meteo_d1_2024.csv"))
+Meteo2025 <- read_csv(here::here("daten/raw/ugz_ogd_meteo_d1_2025.csv"))
+Meteo2026 <- read_csv(here::here("daten/raw/ugz_ogd_meteo_d1_2026.csv"))
 ```
 
 ## Herkunft der Meteo Daten:
@@ -69,8 +72,8 @@ Die Temperaturdaten wurden aus dem Datenbestand des Kantonalen Labors Zürich ex
 #| warning: false
 
 Temp2024_kor <- Temp2024 |> 
-  rename(Probennummer = Probe.Nr,
-         Temperatur = Temperatur.Fleisch) |> 
+  rename(Probennummer = `Probe-Nr`,
+         Temperatur = `Temperatur Fleisch`) |> 
    mutate(
          Datum = sub(" abend 16:45", "", Datum),
          Datum = dmy(Datum),
@@ -87,8 +90,8 @@ Temp2024_kor <- Temp2024 |>
 ```{r}
 
 Temp_2025 <- Temp2025 |> 
-  rename(Probennummer = Pro2.Nr,
-         Temperatur = Temperatur.Fleisch)
+  rename(Probennummer = `Pro2-Nr`,
+         Temperatur = `Temperatur Fleisch`)
   
 ```
 
