@@ -1,7 +1,7 @@
 # Abschlussprojekt rstatsZH
 
 **Datenquelle: ** [Täglich aktualisierte Meteodaten, seit 1992](https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte)  
-**Code (Link anpassen)**: [Quarto Datei](https://github.com/rstatszh-k010/projekt-rainbow-train/blob/master/docs/index.qmd)
+**Code**: [Quarto Datei](https://github.com/rstatszh-k012/projekt-NOnina1/blob/main/index.qmd)
 
 ## Projektbeschreibung
 
