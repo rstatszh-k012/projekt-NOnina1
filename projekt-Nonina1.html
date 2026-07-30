@@ -183,14 +183,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="laden-der-daten" class="level2">
 <h2 class="anchored" data-anchor-id="laden-der-daten">Laden der Daten</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Temp2024 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2024.csv"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Temp2025 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2025.csv"</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Temp2026 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2026.csv"</span>))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Datum2025 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/EingangsdatumProben2025.csv"</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Temp2024 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2024.csv"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Temp2025 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2025.csv"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Temp2026 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/TemperaturProbenankunft2026.csv"</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Datum2025 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/EingangsdatumProben2025.csv"</span>))</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Meteo2024 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2024.csv"</span>))</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Meteo2025 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2025.csv"</span>))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Meteo2026 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2026.csv"</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Meteo2024 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2024.csv"</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Meteo2025 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2025.csv"</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Meteo2026 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"daten/raw/ugz_ogd_meteo_d1_2026.csv"</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="herkunft-der-meteo-daten" class="level2">
@@ -208,8 +208,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2024">Datenbereinigung für das Jahr 2024</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Temp2024_kor <span class="ot">&lt;-</span> Temp2024 <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Probe.Nr,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Temperatur =</span> Temperatur.Fleisch) <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> <span class="st">`</span><span class="at">Probe-Nr</span><span class="st">`</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Temperatur =</span> <span class="st">`</span><span class="at">Temperatur Fleisch</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Datum =</span> <span class="fu">sub</span>(<span class="st">" abend 16:45"</span>, <span class="st">""</span>, Datum),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">Datum =</span> <span class="fu">dmy</span>(Datum),</span>
@@ -224,8 +224,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="datenbereinigung-für-das-jahr-2025">Datenbereinigung für das Jahr 2025</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Temp_2025 <span class="ot">&lt;-</span> Temp2025 <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> Pro2.Nr,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Temperatur =</span> Temperatur.Fleisch)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Probennummer =</span> <span class="st">`</span><span class="at">Pro2-Nr</span><span class="st">`</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Temperatur =</span> <span class="st">`</span><span class="at">Temperatur Fleisch</span><span class="st">`</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Temp2025_datum <span class="ot">&lt;-</span> <span class="fu">left_join</span>(Temp_2025, Datum2025, <span class="at">by =</span> <span class="st">"Probennummer"</span>)</span>
@@ -356,34 +356,44 @@ Tabelle&nbsp;1: Jahres- und saisonale Temperaturstatistik 2024-2026
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: right;">2023</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">7.0</td>
+</tr>
+<tr class="even">
 <td style="text-align: right;">2024</td>
 <td style="text-align: right;">-3.6</td>
 <td style="text-align: right;">31.4</td>
 <td style="text-align: right;">14.3</td>
-<td style="text-align: right;">14.5</td>
-<td style="text-align: right;">24.0</td>
-<td style="text-align: right;">13.1</td>
+<td style="text-align: right;">14.6</td>
+<td style="text-align: right;">24.2</td>
+<td style="text-align: right;">12.8</td>
 <td style="text-align: right;">5.6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: right;">2025</td>
 <td style="text-align: right;">-2.4</td>
 <td style="text-align: right;">32.3</td>
 <td style="text-align: right;">14.1</td>
-<td style="text-align: right;">14.8</td>
-<td style="text-align: right;">24.2</td>
-<td style="text-align: right;">12.8</td>
-<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">15.1</td>
+<td style="text-align: right;">24.1</td>
+<td style="text-align: right;">12.6</td>
+<td style="text-align: right;">4.2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: right;">2026</td>
 <td style="text-align: right;">-5.3</td>
 <td style="text-align: right;">35.5</td>
-<td style="text-align: right;">14.1</td>
-<td style="text-align: right;">15.8</td>
-<td style="text-align: right;">26.4</td>
+<td style="text-align: right;">14.2</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">26.5</td>
 <td style="text-align: right;">NaN</td>
-<td style="text-align: right;">4.9</td>
+<td style="text-align: right;">5.0</td>
 </tr>
 </tbody>
 </table>
@@ -680,9 +690,9 @@ Daher könnten wir noch schauen, wieviele Proben über diesen 8°C waren.</p>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">2026</td>
-<td style="text-align: right;">563</td>
-<td style="text-align: right;">1777</td>
-<td style="text-align: right;">31.7</td>
+<td style="text-align: right;">742</td>
+<td style="text-align: right;">2151</td>
+<td style="text-align: right;">34.5</td>
 </tr>
 </tbody>
 </table>
