@@ -1,7 +1,10 @@
-# Abschlussprojekt rstatsZH
+# Trendanalyse Eingangstemperaturen
 
-**Datenquelle: ** [Täglich aktualisierte Meteodaten, seit 1992](https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte)  
-**Code**: [Quarto Datei](https://github.com/rstatszh-k012/projekt-NOnina1/blob/main/index.qmd)
+Abschlussprojekt rstatsZH Kurs 012
+
+**Bericht**: [Trendanalyse Eingangstemperaturen](https://rstatszh-k012.github.io/projekt-NOnina1/)  
+**Datenquelle**: [Täglich aktualisierte Meteodaten, seit 1992](https://data.stadt-zuerich.ch/dataset/ugz_meteodaten_tagesmittelwerte)  
+**Code**: [Quarto Datei](https://github.com/rstatszh-k012/projekt-NOnina1/blob/main/docs/index.qmd)
 
 ## Projektbeschreibung
 
