@@ -1,5 +1,5 @@
 ---
-title: "Abschlussprojekt Nonina1.qmd"
+title: "Trendanalyse Eingangstemperaturen - Abschlussprojekt rstatsZH Kurs 012"
 author: "Nina"
 format: html
 toc: true
